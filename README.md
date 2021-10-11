@@ -11,3 +11,9 @@ Frontend (React)
 Backend (Node.js)
 
 # 프로젝트 기간
+
+11oct ~ 16oct
+
+# 기술 스택
+
+..
