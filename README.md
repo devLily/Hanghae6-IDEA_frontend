@@ -1,4 +1,4 @@
-# 항해 99기 frontend, backend 미니 프로젝트 6조
+# 항해 99 frontend, backend 미니 프로젝트 6조
 
 # IDEA
 
