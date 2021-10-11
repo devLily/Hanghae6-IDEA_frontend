@@ -14,6 +14,10 @@ Backend (Node.js)
 
 11oct ~ 16oct
 
+# 프로젝트 상세 과정
+
+https://www.notion.so/99-Week-4-Mini-Project-IDEA-670f2d99e4f646a6a74060747a5b4a92
+
 # 기술 스택
 
 ..
