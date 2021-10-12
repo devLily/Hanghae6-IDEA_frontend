@@ -1,0 +1,53 @@
+{
+  "post": [
+    {
+      "postid": 1,
+      "_id": 1,
+      "title": "이용복",
+      "spec": "키171 x 본명이용복",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTccaYhdQv5pRJO2PGSyidEVOVqllc2JREn0Q&usqp=CAU",
+      "nickname": "닉네임임아무튼닉넴임",
+      "place": "2"
+    },
+    {
+      "postid": 2,
+      "_id": 2,
+      "title": "춘식이 커튼인형",
+      "spec": "약 12*16*23cm, 168g 내외",
+      "image": "https://t1.daumcdn.net/friends/prod/product/20210929155953276_8809814922018_AW_00.jpg",
+      "nickname": "사랑아춘식해",
+      "place": "1"
+    },
+    {
+      "postid": 3,
+      "_id": 3,
+      "title": "독서하는 라이언과 춘식이 조명",
+      "spec": "약 15.4*15.4*25cm, 371g내외",
+      "image": "https://t1.daumcdn.net/friends/prod/product/20210903164908002_8809814921752_AW_00.jpg",
+      "nickname": "아이러브춘식",
+      "place": "2"
+    }
+  ],
+  "user": [
+    {
+      "_id": "12345",
+      "email": "idea@idea.com",
+      "nickname": "사랑아춘식해"
+    },
+    {
+      "_id": "1234567",
+      "email": "react@react.com",
+      "nickname": "아이러브춘식"
+    }
+  ],
+  "wish": [
+    {
+      "userId": "12345",
+      "postid": "2"
+    },
+    {
+      "userId": "1234567",
+      "postid": "3"
+    }
+  ]
+}

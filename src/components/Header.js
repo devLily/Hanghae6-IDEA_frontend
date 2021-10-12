@@ -1,4 +1,5 @@
-import React, {Fragment} from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import { Grid, Text, Button, Image } from "../components/elements"
 import styled from "styled-components";
 
@@ -6,7 +7,9 @@ export default function Header(props) {
   return (
             <Grid is_flex padding="4px 16px">
               <Grid>
-               <Images src="/images/IdeaLogo.png" alt="logo" />
+                <Link to="/">
+                  <Images src="/images/IdeaLogo.png" alt="logo" />
+                </Link>
               </Grid>
 
               <Wrap>

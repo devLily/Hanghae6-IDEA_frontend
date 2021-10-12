@@ -1,17 +1,47 @@
-import React, {Fragment} from "react";
+import React, { useState } from "react";
 
 import {Grid, Image, Text} from "../components/elements";
 
-import { FaUserCircle } from 'react-icons/fa';
-import { RiShieldUserLine } from 'react-icons/ri';
+import { FaUserCircle } from "react-icons/fa";
+import { AiOutlineHeart } from "react-icons/ai";
+import { RiHeartAddLine } from "react-icons/ri";
+import { AiTwotoneHeart } from "react-icons/ai";
+import { RiShieldUserLine } from "react-icons/ri";
+
 import styled from "styled-components";
 
 export default function Post(props) {
   const { title, spec, image, nickname, place } = props;
+  const [ isWished, setIsWished ] = useState(false);
+  const checedkWish = () => {
+    setIsWished(true);
+  }
+
+  const unClickWish = () => {
+    setIsWished(false);
+  }
+
+  if (isWished) {
+    return (
+      <Wrap>
+        <Images src={image} alt="goods"/>
+        <Heart><AiTwotoneHeart size={20} onClick={unClickWish}/></Heart>
+        {/* s */}
+        <Grid padding="10px">
+          <Text bold><FaUserCircle />{" "}{nickname}</Text>
+          <Text>{title}</Text>
+          <Text>추천공간 {place}</Text>
+          <Text>{spec}</Text>
+        </Grid>
+      </Wrap>
+    );
+  }
   return (
     <Wrap>
       <Images src={image} alt="goods"/>
-      <Grid padding="16px">
+      <Heart><AiOutlineHeart size={20} onClick={checedkWish}/></Heart>
+      {/* s */}
+      <Grid padding="10px">
         <Text bold><FaUserCircle />{" "}{nickname}</Text>
         <Text>{title}</Text>
         <Text>추천공간 {place}</Text>
@@ -21,7 +51,6 @@ export default function Post(props) {
   );
 }
 
-
 Post.defaultProps = {
   postId: "postId",
   title: "인형같지만 진짜 인형춘식",
@@ -30,17 +59,6 @@ Post.defaultProps = {
   nickname: "닉네임",
   place: "침실",
   }
-
-  // Post.defaultProps = {
-  //   user_info: {
-  //     user_name: "mean0",
-  //     user_profile: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
-  //   },
-  //   image_url: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
-  //   contents: "고양이네요!",
-  //   comment_cnt: 10,
-  //   insert_dt: "2021-02-27 10:00:00",
-  // };
 
 const Images = styled.img`
   width:200px;
@@ -55,4 +73,14 @@ const Wrap = styled.div`
   align-items: center;
   flex-direction: column;
   padding-top: 100px;
+`;
+
+
+const Heart = styled.div`
+  display: flex;
+  margin-left: 150px;
+  cursor: pointer;
+  &:hover {
+    size: 25;
+  }
 `;

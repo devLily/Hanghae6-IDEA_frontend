@@ -10,11 +10,21 @@ const initialState = {
   list: [],
 };
 
+const initialPost = {
+  postId: "postId",
+  title: "인형같지만 진짜 인형인 춘식",
+  spec: "키 10cm x 몸무게 300g",
+  image: "https://cfnimage.commutil.kr/phpwas/restmb_allidxmake.php?idx=3&simg=202012170917410759599ebb03838180228147171.jpg",
+  nickname: "닉네임",
+  place: "침실",
+}
+
 const getPostList = () => {
   return (dispatch) => {
     apis
       .getPost()
       .then((res) => {
+        console.log(res);
         const postList = res.data;
         dispatch(loadPosts(postList));
       })
@@ -32,6 +42,6 @@ export default handleActions({
 }, initialState
 );
 
-export const postCreators = {
+export const actionCreators = {
   getPostList
 }

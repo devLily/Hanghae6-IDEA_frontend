@@ -10,11 +10,15 @@ import styled from "styled-components";
 export default function PostList(props) {
   return(
     <Wrap>
-      <FaChevronLeft size={30} onClick/>
+      <IconWrap>
+        <FaChevronLeft size={30} onClick/>
+      </IconWrap>
         <Post/>
         <Post/>
         <Post/>
-      <FaChevronRight size={30} onClick/>
+      <IconWrap>
+        <FaChevronRight size={30} onClick/>
+      </IconWrap>
     </Wrap>
   );
 }
@@ -23,4 +27,8 @@ const Wrap = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
+`;
+
+const IconWrap = styled.div`
+  cursor: pointer;
 `;
