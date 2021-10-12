@@ -10,12 +10,3 @@ export default function Button(props) {
   </Grid>
   );
 }
-
-// Button.defaultProps = {
-//   text: false,
-//   children: null,
-//   _onClick: () => {},
-//   is_float: false,
-//   margin: false,
-//   width: '100%',
-// };
