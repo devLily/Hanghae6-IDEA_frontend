@@ -12,6 +12,9 @@ export const apis = {
 
   getWish: () => instance.get("/wish"),
   // 위시리스트 불러오기
-  addWish: (email, id) => instance.post("/wish", email,id )
+  addWish: (email, id) => instance.post("/wish", email,id ),
   // 위시리스트 등록하기
+
+  // Signup(): () => instance.post("/signup")
+  login: (params) => instance.post("/login", params)
 };

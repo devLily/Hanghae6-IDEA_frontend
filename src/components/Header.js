@@ -1,32 +1,81 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Grid, Text, Button, Image } from "../components/elements"
+import { Grid, Text, Button, Image } from "../components/elements";
 import styled from "styled-components";
 
 export default function Header(props) {
   return (
-            <Grid is_flex padding="4px 16px">
-              <Grid>
-                <Link to="/">
-                  <Images src="/images/IdeaLogo.png" alt="logo" />
-                </Link>
-              </Grid>
+    <HeaderContainer>
+      <LogoLink to="/">
+        <LogoImage src="/images/IdeaLogo.png" alt="logo" />
+      </LogoLink>
 
-              <Wrap>
-                <Button margin="10px" text="login"/>
-                <Button text="signup"/>
-              </Wrap>
-            </Grid>
+      <ButtonWrap>
+        <HeaderButton>Login</HeaderButton>
+        <HeaderButton>Signup</HeaderButton>
+      </ButtonWrap>
+    </HeaderContainer>
   );
 }
 
-const Images = styled.img`
+const HeaderContainer = styled.div`
+  background-color: #0438ae;
+  display: flex;
+  justify-content: space-between;
+  align-items: cneter;
+  width: 100%;
+  height: 70px;
+  padding: 0 20px;
+`;
+
+const LogoLink = styled(Link)`
+  display: block;
+`;
+
+const LogoImage = styled.img`
   width: 150px;
   height: 70px;
 `;
 
-const Wrap = styled.div`
+const ButtonWrap = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const HeaderButton = styled.button`
+  background-color: transparent;
+  border: 0;
+  border-radius: 3px;
+  color: #fff10a;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 0 16px;
+  padding: 0;
+  position: relative;
+  min-width: 60px;
+  height: 40px;
+  line-height: 40px;
+  transition: all 0.3s;
+
+  &::after {
+    background-color: #ffffff;
+    content: "";
+    position: absolute;
+    height: 2px;
+    opacity: 0;
+    width: 0;
+    left: 0;
+    bottom: 0;
+    transition: all 0.3s;
+  }
+
+  &:hover {
+    color: #ffffff;
+
+    &::after {
+      width: 100%;
+      opacity: 1;
+    }
+  }
 `;
