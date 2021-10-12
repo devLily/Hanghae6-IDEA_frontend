@@ -1,8 +1,14 @@
-import React, {Fragment} from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
 
-export default function PostList(props) {
+const PostList = () => {
+  console.log("PostList 연결");
+
   return (
-    <Fragment>postList</Fragment>
+    <Fragment>
+      테스트
+    </Fragment>
   );
 }
+
+export default PostList;
