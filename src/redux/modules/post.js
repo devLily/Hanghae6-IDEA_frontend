@@ -24,16 +24,16 @@ const getPostList = () => {
     apis
       .getPost()
       .then((res) => {
-        console.log(res);
-        const postList = res.data;
+        const postList = res.data.post;
         dispatch(loadPosts(postList));
-      })
+        })
       .catch((error) => {
         window.alert("게시물을 불러오는데 실패하였습니다.");
         console.error(error)
       })
   }
 }
+
 
 export default handleActions({
   [LOAD_POSTS]: (state, action) => produce(state, (draft) => {
