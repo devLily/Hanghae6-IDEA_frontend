@@ -3,20 +3,20 @@ import thunk from "redux-thunk";
 import { createBrowserHistory } from "history";
 import { connectRouter } from "connected-react-router";
 
-import User from "./user";
-import Post from "./post";
-import Wish from "./wish";
+import User from "../redux/modules/user";
+import Post from "../redux/modules/post";
+import Wish from "../redux/modules/wish";
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
-  //user: User,
+  user: User,
   post: Post,
-  //wish: Wish,
-  router: connectRouter(history)
+  wish: Wish,
+  router: connectRouter(history),
 });
 
-const middlewares = [thunk.withExtraArgument({history: history})];
+const middlewares = [thunk.withExtraArgument({ history: history })];
 
 const env = process.env.NODE_ENV;
 
@@ -27,10 +27,8 @@ if (env === "development") {
 
 const composeEnhancers =
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-
-  })
-  :compose;
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+    : compose;
 
 const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 

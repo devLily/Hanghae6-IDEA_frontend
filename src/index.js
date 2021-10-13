@@ -2,14 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
-import store from "./redux/modules/configStore";
+import store from "./redux/configStore";
 
 import reportWebVitals from "./reportWebVitals";
 
 import App from "./Shared/App";
 
 ReactDOM.render(
-  // <Provider store={store}></Provider>
   <Provider store={store}>
     <App />
   </Provider>,

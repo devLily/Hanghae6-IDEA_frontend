@@ -1,13 +1,13 @@
 {
   "post": [
     {
-      "title":"춘식이 커튼인형",
+      "title": "춘식이 커튼인형",
       "spec": "약 12*16*23cm, 168g 내외",
-      "nickname":"라이언",
+      "nickname": "라이언",
       "image": "https://t1.daumcdn.net/friends/prod/product/20210929155953276_8809814922018_AW_00.jpg",
       "desc": "춘식이가 커튼을 안고있어요",
       "place": "1"
-  },
+    },
     {
       "postid": 1,
       "_id": 1,
@@ -38,21 +38,41 @@
   ],
   "user": [
     {
-      "_id": "12345",
       "email": "idea@idea.com",
-      "nickname": "사랑아춘식해"
-    },
-    {
-      "_id": "1234567",
-      "email": "react@react.com",
-      "nickname": "아이러브춘식"
-    },
-    {
-      "email":"idea@idea.com",
       "pw": "12345",
       "pwCheck": "12345",
-      "nickname":"라이언"
-  }
+      "nickname": "라이언"
+    },
+    {
+      "email": "code@code.com",
+      "pw": "12345",
+      "pwCheck": "12345",
+      "nickname": "춘식이"
+    },
+    {
+      "email": "muzzi@muzzi.com",
+      "pw": "12345",
+      "pwCheck": "12345",
+      "nickname": "무찌는햄찌"
+    },
+    {
+      "email": "pengsoo@peng.com",
+      "pw": "12345",
+      "pwCheck": "12345",
+      "nickname": "펭하!"
+    },
+    {
+      "email": "yongbok@skz.com",
+      "pw": "12345",
+      "pwCheck": "12345",
+      "nickname": "용복"
+    },
+    {
+      "email": "peach@peach.com",
+      "pw": "12345",
+      "pwCheck": "12345",
+      "nickname": "어피치"
+    }
   ],
   "wish": [
     {
@@ -63,43 +83,5 @@
       "userId": "1234567",
       "postid": "3"
     }
-  ]
-}
-
-{
-  "user": [
-    {
-      "email":"idea@idea.com",
-      "pw": "12345",
-      "pwCheck": "12345",
-      "nickname":"라이언"
-  },
-  {
-    "email":"code@code.com",
-    "pw": "12345",
-    "pwCheck": "12345",
-    "nickname":"춘식이"
-  },
-  {
-    "email":"muzzi@muzzi.com",
-    "pw": "12345",
-    "pwCheck": "12345",
-    "nickname":"무찌는햄찌"
-  },
-  {
-    "email":"pengsoo@peng.com",
-    "pw": "12345",
-    "pwCheck": "12345",
-    "nickname":"펭하!"
-  },
-  {
-    "email":"yongbok@skz.com",
-    "pw": "12345",
-    "pwCheck": "12345",
-    "nickname":"용복"
-  }
-],
-  "post": [
-
   ]
 }

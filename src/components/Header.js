@@ -1,9 +1,22 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
+import { history } from "../redux/configStore";
 import { Grid, Text, Button, Image } from "../components/elements";
 import styled from "styled-components";
 
 export default function Header(props) {
+  const user = useSelector((state) => state.user.user);
+  const toLoginPage = () => {
+    console.log("history", history);
+    history.push("/login");
+  };
+
+  const toSignupPage = () => {
+    history.push("/signup");
+  };
+
   return (
     <HeaderContainer>
       <LogoLink to="/">
@@ -11,8 +24,9 @@ export default function Header(props) {
       </LogoLink>
 
       <ButtonWrap>
-        <HeaderButton>Login</HeaderButton>
-        <HeaderButton>Signup</HeaderButton>
+        {user ? <h1>유저 있음 로그인함</h1> : <h1>유저 없음 로그인 안함</h1>}
+        <HeaderButton onClick={toLoginPage}>Login</HeaderButton>
+        <HeaderButton onClick={toSignupPage}>Signup</HeaderButton>
       </ButtonWrap>
     </HeaderContainer>
   );

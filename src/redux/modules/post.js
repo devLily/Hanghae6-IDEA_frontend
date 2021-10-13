@@ -23,7 +23,7 @@ const initialPost = {
 const getPostList = () => {
   return (dispatch) => {
     apis
-      .getPost()
+      .getPosts()
       .then((res) => {
         const postList = res.data.post;
         dispatch(loadPosts(postList));

@@ -18,6 +18,6 @@ Backend (Node.js)
 
 https://www.notion.so/99-Week-4-Mini-Project-IDEA-670f2d99e4f646a6a74060747a5b4a92
 
-# 기술 스택
+- POST DATA 하나에 해당하는 전체 위시리스트(좋아요) 카운트를 줄 수 있나요? 내려줄 때 정렬해서 응답주실 수 있나요?ㅠㅜ
 
-..
+# Frontend

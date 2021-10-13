@@ -1,27 +1,39 @@
-import React, { useState } from "react";
-
-import { Grid, Image, Text } from "../components/elements";
-
+import React, { useState, useCallback } from "react";
+import { useDispatch } from "react-redux";
+import styled from "styled-components";
 import { FaUserCircle } from "react-icons/fa";
 import { AiOutlineHeart } from "react-icons/ai";
 import { RiHeartAddLine } from "react-icons/ri";
 import { AiTwotoneHeart } from "react-icons/ai";
 import { RiShieldUserLine } from "react-icons/ri";
 
-import styled from "styled-components";
+import { actionCreators as wishActions } from "../redux/modules/wish";
+
+import { Grid, Image, Text } from "../components/elements";
 
 export default function Post({ post }) {
-  const { title, spec, image, nickname, place } = post;
+  const { title, spec, image, nickname, place, _id } = post;
   const [isWished, setIsWished] = useState(false);
-  const checedkWish = () => {
+  const dispatch = useDispatch();
+
+  const toggleWish = useCallback(() => {
+    if (isWished) {
+      dispatch(wishActions.deleteWishItem());
+      setIsWished(false);
+      return;
+    }
+    console.log("toggleWish");
+    dispatch(wishActions.addWishItem("muzzi1@muzzi.com", _id));
     setIsWished(true);
-  };
-
-  const unClickWish = () => {
-    setIsWished(false);
-  };
+    return;
+    // try {
+    // } catch (err) {
+    //   console.error();
+    // } finally {
+    // }
+  }, [dispatch, isWished, _id]);
   // 거실=1, 침실=2, 주방=3, 화장실=4, 기타=5
-
+  // addWishItem
   const setPlaceName = () => {
     switch (Number(place)) {
       case 1:
@@ -42,9 +54,9 @@ export default function Post({ post }) {
       <Images src={image} alt="goods" />
       <Heart>
         {isWished ? (
-          <AiTwotoneHeart size={20} onClick={unClickWish} />
+          <AiTwotoneHeart size={20} color="red" onClick={toggleWish} />
         ) : (
-          <AiOutlineHeart size={20} onClick={checedkWish} />
+          <AiOutlineHeart size={20} onClick={toggleWish} />
         )}
       </Heart>
       {/* s */}
@@ -59,6 +71,11 @@ export default function Post({ post }) {
     </Wrap>
   );
 }
+
+Post.defaultProps = {
+  image:
+    "http://www.cleandropleon.com/sistema/assets/images/services/default.png",
+};
 
 const Images = styled.img`
   min-height: 300px;
@@ -84,3 +101,16 @@ const Heart = styled.div`
     size: 25;
   }
 `;
+
+// router.post("/", authMiddleware, async (req, res) => {
+//   try {
+//     const { email, postId } = req.body;
+//     const isUser = await User.findOne({ email: email });
+//     console.log("isUser", isUser);
+//     const newWish = await Wish.create({ userId: isUser._id, postId: postId });
+//     console.log("newWish", newWish);
+//     res.status(200).send({ wish: newWish });
+//   } catch (err) {
+//     res.status(400).send({ err: err });
+//   }
+// });

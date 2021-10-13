@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Slider from "react-slick";
@@ -16,7 +16,7 @@ export default function PostList(props) {
   const slickSettings = {
     dots: true, // pagination dot
     infinite: true, // 끝이없음.
-    autoplay: false,
+    autoplay: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
