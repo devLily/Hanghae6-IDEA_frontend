@@ -1,10 +1,18 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Grid, Image, Text, Button } from "../components/elements";
 
 
 export default function Post(props) {
+  const dispatch = useDispatch();
+
+  const post = props;
+
+  console.log(post);
+
+
   const { nickname, title, spec, image, desc, place } = props;
 
   return (
@@ -60,11 +68,11 @@ export default function Post(props) {
   );
 }
 
-Post.defaultProps = {
-  nickname: "오늘의집구석",
-  title: "컬러풀 선셋조명 단스탠드/발리 석양 느낌 무드등(국내 인증제품)",
-  spec: "알루미늄, 원형, 숏 스탠드, 6.5W, 220V,  ",
-  image: "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/161291891574987927.jpg",
-  desc: "따뜻한 석양빛, 짙은 노랑과 오렌지의 컬러 그라데이션",
-  place: "거실",
-};
+// Post.defaultProps = {
+//   nickname: "오늘의집구석",
+//   title: "컬러풀 선셋조명 단스탠드/발리 석양 느낌 무드등(국내 인증제품)",
+//   spec: "알루미늄, 원형, 숏 스탠드, 6.5W, 220V",
+//   image: "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/161291891574987927.jpg",
+//   desc: "따뜻한 석양빛, 짙은 노랑과 오렌지의 컬러 그라데이션",
+//   place: "거실",
+// };

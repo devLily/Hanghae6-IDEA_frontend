@@ -1,13 +1,20 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+
+import { actionCreators as postActions } from "../redux/modules/post";
+
+import { Grid } from "../components/elements";
 
 const PostList = () => {
-  console.log("PostList 연결");
+  const postList = useSelector((state) => state.post.list);
+  const dispatch = useDispatch();
+
 
   return (
-    <Fragment>
-      테스트
-    </Fragment>
+    <Grid>
+      메인 페이지
+    </Grid>
   );
 }
 
