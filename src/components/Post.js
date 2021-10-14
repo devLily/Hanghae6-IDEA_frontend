@@ -42,7 +42,7 @@ export default function Post(props) {
         </Grid>
       </Grid>
 
-      <Grid>
+      <Grid margin="10px">
         {/* 제품 타이틀 */}
         <Grid is_flex>
           <Text bold>제품</Text>

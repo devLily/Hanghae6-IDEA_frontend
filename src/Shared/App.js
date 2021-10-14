@@ -16,7 +16,7 @@ function App() {
 
   React.useEffect(() => {
     dispatch(postActions.getPostList());
-    console.log("getPostList() @ App.js");
+    // console.log("getPostList() @ App.js");
   }, []);
 
   return (

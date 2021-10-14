@@ -31,7 +31,7 @@ export default function Image(props) {
 
 Image.defaultProps = {
   shape: "circle",
-  src: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
+  src: "https://thesocialstudies.co/wp-content/uploads/2021/06/placeholder-1-1.jpg",
   size: 36,
 };
 

@@ -9,7 +9,6 @@ const initialState = {
 };
 
 
-
 // const initialPost = {
 //     postId: "postId",
 //     title: "인형같지만 진짜 인형인 춘식",
@@ -22,12 +21,12 @@ const initialState = {
 
 // ACTIONS
 const LOAD_POSTS = "LOAD_POSTS";
-
+const ADD_POST = "ADD_POST";
 
 
 // ACTION CREATORS
 const loadPosts = createAction(LOAD_POSTS, (list) => ({ list }));
-
+const addPost = createAction(ADD_POST, (post) => ({ post }));
 
 
 // MIDDLEWARES
@@ -47,6 +46,31 @@ const getPostList = () => {
     }
 }
 
+const createPost = (title = "", spec = "", place = "", desc = "", image = "") => {
+    return function (dispatch) {
+
+        // 게시글 형식 맞추기
+        const _post = {
+            title: title,
+            spec: spec,
+            nickname: "ynjnkn",
+            image: image,
+            place: place,
+            desc: desc,
+        }
+        // console.log(_post);
+
+        apis
+            .createPost(_post)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+}
+
 
 
 // REDUCER
@@ -54,10 +78,18 @@ export default handleActions({
     [LOAD_POSTS]: (state, action) => produce(state, (draft) => {
         draft.list = action.payload.list;
     }),
+
+    [ADD_POST]: (state, action) => produce(state, (draft) => {
+        // console.log(action.payload.)
+        // draft.list = action.payload.list;
+        draft.list.push(action.payload.list);
+    }),
+
 }, initialState
 );
 
 
 export const actionCreators = {
     getPostList,
+    createPost,
 }

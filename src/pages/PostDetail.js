@@ -26,7 +26,7 @@ export default function PostDetail(props) {
     <Grid>
       {post && (<Post {...post} />)}
       {/* 로그인 됐을 경우에만 CommentWrite 활성화 */}
-      <CommentWrite />
+      {/* <CommentWrite /> */}
     </Grid>
   );
 }
