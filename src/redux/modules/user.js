@@ -51,13 +51,12 @@ const loginMiddleware = (params) => {
         const { token } = res.data;
         dispatch(setUser(token));
         setCookie("user", token);
-        alert("로그인 성공!");
-        history.replace("/");
+        window.alert("로그인 성공!");
+        window.location("/");
       })
       .catch((error) => {
         window.alert("로그인에 실패하였습니다. 다시 시도해주세요");
         console.error(error);
-        history.push("/login");
       });
   };
 };
@@ -67,8 +66,8 @@ const logOutMiddleware = async () => {
     apis.logout().then((res) => {
       //console.log(res.data);
       dispatch(logOut());
-      alert("로그아웃 되었습니다");
-      history.push("/");
+      window.alert("로그아웃 되었습니다");
+      //history.push("/");
     });
   };
 };
