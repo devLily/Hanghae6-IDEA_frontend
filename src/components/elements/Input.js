@@ -1,20 +1,3 @@
-<<<<<<< HEAD
-import React, { useState } from "react";
-import styled from "styled-components";
-
-export default function Input(props) {
-  const [inputValue, setInputValue] = useState("");
-
-  const changeInput = (event) => {
-    setInputValue(event.target.value);
-    console.log(event.target.value);
-  };
-
-  return (
-    <div>
-      <input value={inputValue} onChange={changeInput} />
-    </div>
-=======
 import React from "react";
 import styled from "styled-components";
 
@@ -66,7 +49,6 @@ const Input = (props) => {
           />)}
       </Grid>
     </React.Fragment>
->>>>>>> 60ac55797b59900453ed884bbf15b5b5ed37b8b0
   );
 };
 

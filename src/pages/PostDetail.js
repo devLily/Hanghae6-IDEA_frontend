@@ -11,10 +11,6 @@ import CommentWrite from "../components/CommentWrite";
 import reactRouterDom from "react-router-dom";
 
 export default function PostDetail(props) {
-<<<<<<< HEAD
-  return <Fragment>post detail</Fragment>;
-}
-=======
   const dispatch = useDispatch();
 
   const postList = useSelector((state) => state.post.list.post);
@@ -23,7 +19,7 @@ export default function PostDetail(props) {
 
   // 스토어에서 user 상태 가져오기
 
-  // postList가 있을 때만 post 찾기 
+  // postList가 있을 때만 post 찾기
   const post = postList && postList.find((post) => post._id === postId);
 
   return (
@@ -34,4 +30,3 @@ export default function PostDetail(props) {
     </Grid>
   );
 }
->>>>>>> 60ac55797b59900453ed884bbf15b5b5ed37b8b0

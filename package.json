@@ -8,18 +8,6 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.22.0",
     "connected-react-router": "^6.9.1",
-<<<<<<< HEAD
-    "history": "^4.10.1",
-    "immer": "^9.0.6",
-    "jwt-decode": "^3.1.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-icons": "^4.3.1",
-    "react-redux": "^7.2.5",
-    "react-router-dom": "^5.3.0",
-    "react-scripts": "4.0.3",
-    "react-slick": "^0.28.1",
-=======
     "firebase": "8.10.0",
     "history": "4.10.1",
     "immer": "^9.0.6",
@@ -28,13 +16,11 @@
     "react-redux": "^7.2.5",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
->>>>>>> 60ac55797b59900453ed884bbf15b5b5ed37b8b0
     "redux": "^4.1.1",
     "redux-actions": "^2.6.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.3.1",
-    "styled-reset": "^4.3.4",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -60,9 +46,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "slick-carousel": "^1.8.1"
-  },
-  "proxy": "http://13.124.99.118"
+  }
 }
