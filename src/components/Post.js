@@ -12,7 +12,7 @@ import { actionCreators as wishActions } from "../redux/modules/wish";
 import { Grid, Image, Text } from "../components/elements";
 
 export default function Post({ post }) {
-  const { title, spec, image, nickname, place, _id } = post;
+  const { title, spec, image, nickname, place, postId } = post;
   const [isWished, setIsWished] = useState(false);
   const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ export default function Post({ post }) {
     //   console.error();
     // } finally {
     // }
-  }, [dispatch, isWished, _id]);
+  }, [dispatch, isWished, postId]);
   // 거실=1, 침실=2, 주방=3, 화장실=4, 기타=5
   // addWishItem
   const setPlaceName = () => {
@@ -73,10 +73,10 @@ export default function Post({ post }) {
   );
 }
 
-Post.defaultProps = {
-  image:
-    "http://www.cleandropleon.com/sistema/assets/images/services/default.png",
-};
+// Post.defaultProps = {
+//   image:
+//     "http://www.cleandropleon.com/sistema/assets/images/services/default.png",
+// };
 
 const Images = styled.img`
   min-height: 300px;

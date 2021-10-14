@@ -7,9 +7,9 @@ export default function Button(props) {
   const { text } = props;
 
   return (
-  <Grid>
-    <button>{text}</button>
-  </Grid>
+    <Grid>
+      <button>{text}</button>
+    </Grid>
   );
 }
 
@@ -19,5 +19,5 @@ Button.defaultProps = {
   _onClick: () => {},
   is_float: false,
   margin: false,
-  width: '100%',
+  width: "100%",
 };

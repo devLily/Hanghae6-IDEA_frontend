@@ -6,6 +6,7 @@ import { connectRouter } from "connected-react-router";
 import User from "../redux/modules/user";
 import Post from "../redux/modules/post";
 import Wish from "../redux/modules/wish";
+import Image from "../redux/modules/image";
 
 export const history = createBrowserHistory();
 

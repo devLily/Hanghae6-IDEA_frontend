@@ -29,19 +29,13 @@ export default function PostList(props) {
   // 거실=1, 침실=2, 주방=3, 화장실=4, 기타=5
   return (
     <PostListContainer>
-      {/* <IconWrap>
-        <FaChevronLeft size={30} />
-      </IconWrap> */}
       <SliderWrap>
         <Slider {...slickSettings}>
           {postList.map((post) => {
-            return <Post key={post._id} post={post} />;
+            return <Post key={post.postId} post={post} />;
           })}
         </Slider>
       </SliderWrap>
-      {/* <IconWrap>
-        <FaChevronRight size={30} />
-      </IconWrap> */}
     </PostListContainer>
   );
 }

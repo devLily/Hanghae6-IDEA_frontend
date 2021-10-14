@@ -12,6 +12,8 @@ import { actionCreators as userActions } from "../redux/modules/user";
 import { Grid } from "../components/elements";
 import Header from "../components/Header";
 import PostList from "../pages/PostList";
+import PostWrite from "../pages/PostWrite";
+import PostDetail from "../pages/PostDetail";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import WishList from "../pages/WishList";
@@ -36,6 +38,7 @@ const GlobalStyle = createGlobalStyle`
 // 1. cookie가 있는지 확인 => getcookie
 export default function App() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (getCookie("user")) {
       dispatch(userActions.setUser(getCookie("user")));
@@ -55,6 +58,8 @@ export default function App() {
             <Route path="/login" exact component={Login} />
             <Route path="/signup" exact component={Signup} />
             <Route path="/wish/:id" exact component={WishList} />
+            <Route path="/write" exact component={PostWrite} />
+            <Route exact path="/post/:postId" component={PostDetail} />
           </Switch>
         </ConnectedRouter>
       </Grid>
