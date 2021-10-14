@@ -1,5 +1,6 @@
 import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
+<<<<<<< HEAD
 import jwt_decode from "jwt-decode";
 import { apis } from "../../utils/apis";
 import { setCookie, deleteCookie } from "../../utils/cookie";
@@ -102,3 +103,6 @@ export const actionCreators = {
   setUser,
   logOut,
 };
+=======
+import { apis } from "../../lib/axios";
+>>>>>>> 60ac55797b59900453ed884bbf15b5b5ed37b8b0

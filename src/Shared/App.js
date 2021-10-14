@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
@@ -8,10 +9,17 @@ import { history } from "../redux/configStore";
 
 import { actionCreators as postActions } from "../redux/modules/post";
 import { actionCreators as userActions } from "../redux/modules/user";
+=======
+import React from "react";
+import { Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+>>>>>>> 60ac55797b59900453ed884bbf15b5b5ed37b8b0
 
 import { Grid } from "../components/elements";
 import Header from "../components/Header";
 import PostList from "../pages/PostList";
+<<<<<<< HEAD
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import WishList from "../pages/WishList";
@@ -57,7 +65,36 @@ export default function App() {
             <Route path="/wish/:id" exact component={WishList} />
           </Switch>
         </ConnectedRouter>
+=======
+import PostDetail from "../pages/PostDetail";
+import PostWrite from "../pages/PostWrite";
+import { actionCreators as postActions } from "../redux/modules/post";
+
+
+function App() {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(postActions.getPostList());
+    // console.log("getPostList() @ App.js");
+  }, []);
+
+  return (
+    <React.Fragment>
+      <Grid isRoot>
+        <Header />
+        <BrowserRouter>
+          <Route exact path="/" component={PostList} />
+          <Route path="/write" exact component={PostWrite} />
+          <Route exact path="/post/:postId" component={PostDetail} />
+        </BrowserRouter>
+>>>>>>> 60ac55797b59900453ed884bbf15b5b5ed37b8b0
       </Grid>
     </React.Fragment>
   );
 }
+<<<<<<< HEAD
+=======
+
+export default App;
+>>>>>>> 60ac55797b59900453ed884bbf15b5b5ed37b8b0

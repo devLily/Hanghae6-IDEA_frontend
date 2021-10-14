@@ -31,7 +31,7 @@ export default function Image(props) {
 
 Image.defaultProps = {
   shape: "circle",
-  src: "https://mean0images.s3.ap-northeast-2.amazonaws.com/4.jpeg",
+  src: "https://thesocialstudies.co/wp-content/uploads/2021/06/placeholder-1-1.jpg",
   size: 36,
 };
 
@@ -42,10 +42,11 @@ const AspectOutter = styled.div`
 
 const AspectInner = styled.div`
     position: relative;
-    padding-top: 75%;
+    padding-top: 100%;
     overflow: hidden;
     background-image: url("${(props) => props.src}");
     background-size: cover;
+    border-radius: 10px;
 `;
 
 const ImageCircle = styled.div`

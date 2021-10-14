@@ -4,6 +4,7 @@ import { apis } from "../../utils/apis";
 
 import { actionCreators as postActions } from "./post";
 
+<<<<<<< HEAD
 const LOAD_WISHS = "LOAD_WISHS";
 const ADD_WISH = "ADD_WISH";
 const DELETE_WISH = "DELETE_WISH";
@@ -105,3 +106,8 @@ export const actionCreators = {
   addWishItem,
   deleteWishItem,
 };
+=======
+const SET_WISH = "SET_WISH";
+const ADD_WISH = "ADD_WISH";
+const DELETE_WISH = "DELETE_WISH";
+>>>>>>> 60ac55797b59900453ed884bbf15b5b5ed37b8b0

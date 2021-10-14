@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
@@ -81,3 +82,26 @@ const SliderWrap = styled.div`
 const IconWrap = styled.div`
   cursor: pointer;
 `;
+=======
+import React, { Fragment } from "react";
+import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+
+import { actionCreators as postActions } from "../redux/modules/post";
+
+import { Grid } from "../components/elements";
+
+const PostList = () => {
+  const postList = useSelector((state) => state.post.list);
+  const dispatch = useDispatch();
+
+
+  return (
+    <Grid>
+      메인 페이지
+    </Grid>
+  );
+}
+
+export default PostList;
+>>>>>>> 60ac55797b59900453ed884bbf15b5b5ed37b8b0

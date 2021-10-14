@@ -51,6 +51,7 @@ export default function Header(props) {
   }
 
   return (
+<<<<<<< HEAD
     <HeaderContainer>
       <LogoLink to="/">
         <LogoImage src="/images/IdeaLogo.png" alt="logo" />
@@ -61,6 +62,11 @@ export default function Header(props) {
         <HeaderButton onClick={toSignupPage}>Signup</HeaderButton>
       </ButtonWrap>
     </HeaderContainer>
+=======
+    <Fragment>
+      헤더
+    </Fragment>
+>>>>>>> 60ac55797b59900453ed884bbf15b5b5ed37b8b0
   );
 }
 
