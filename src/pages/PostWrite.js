@@ -10,13 +10,14 @@ const PostWrite = (props) => {
   // 유저 로그인 상태 확인 필요
   // 유저 닉네임 가져오기 필요
 
-  let is_login = true;
+  // let is_login = true;
 
   const dispatch = useDispatch();
   const { history } = props;
 
   const imagePreview = useSelector((state) => state.image.preview);
   const image = useSelector((state) => state.image.image_url);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   // const postList = useSelector((state) => state.post.list.post);
   // console.log(postList);
 
@@ -58,7 +59,7 @@ const PostWrite = (props) => {
   };
 
   // 로그인 상태라면
-  if (is_login) {
+  if (isLoggedIn) {
     return (
       <Grid>
         <Grid is_flex>

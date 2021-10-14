@@ -39,7 +39,7 @@ export default function Header(props) {
         <ButtonWrap>
           <HeaderButton
             onClick={() => {
-              history.push("/mypage");
+              history.push("/wish");
             }}
           >
             My Page
