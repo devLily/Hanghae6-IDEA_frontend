@@ -1,21 +1,54 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { history } from "../redux/configStore";
+import { actionCreators as userActions } from "../redux/modules/user";
 import { Grid, Text, Button, Image } from "../components/elements";
 import styled from "styled-components";
 
 export default function Header(props) {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+
   const toLoginPage = () => {
-    console.log("history", history);
+    //console.log("history", history);
     history.push("/login");
   };
 
   const toSignupPage = () => {
     history.push("/signup");
   };
+
+  const toLogOut = async () => {
+    try {
+      await dispatch(userActions.logOut());
+      history.push("/");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  if (user) {
+    return (
+      <HeaderContainer>
+        <LogoLink to="/">
+          <LogoImage src="/images/IdeaLogo.png" alt="logo" />
+        </LogoLink>
+
+        <ButtonWrap>
+          <HeaderButton
+            onClick={() => {
+              history.push("/mypage");
+            }}
+          >
+            My Page
+          </HeaderButton>
+          <HeaderButton onClick={toLogOut}>Log out</HeaderButton>
+        </ButtonWrap>
+      </HeaderContainer>
+    );
+  }
 
   return (
     <HeaderContainer>
@@ -24,7 +57,6 @@ export default function Header(props) {
       </LogoLink>
 
       <ButtonWrap>
-        {user ? <h1>유저 있음 로그인함</h1> : <h1>유저 없음 로그인 안함</h1>}
         <HeaderButton onClick={toLoginPage}>Login</HeaderButton>
         <HeaderButton onClick={toSignupPage}>Signup</HeaderButton>
       </ButtonWrap>

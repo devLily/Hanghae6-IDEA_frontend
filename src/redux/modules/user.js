@@ -2,7 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import jwt_decode from "jwt-decode";
 import { apis } from "../../utils/apis";
-import { setCookie } from "../../utils/cookie";
+import { setCookie, deleteCookie } from "../../utils/cookie";
 
 const POST_LOGIN = "POST_LOGIN";
 const SET_USER = "SET_USER";
@@ -43,19 +43,33 @@ const signupMiddleware = (user) => {
 };
 
 const loginMiddleware = (params) => {
-  return (dispatch) => {
+  return (dispatch, { history }) => {
     apis
       .login(params)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         const { token } = res.data;
         dispatch(setUser(token));
         setCookie("user", token);
+        alert("로그인 성공!");
+        history.replace("/");
       })
       .catch((error) => {
         window.alert("로그인에 실패하였습니다. 다시 시도해주세요");
         console.error(error);
+        history.push("/login");
       });
+  };
+};
+
+const logOutMiddleware = async () => {
+  return (dispatch, { history }) => {
+    apis.logout().then((res) => {
+      //console.log(res.data);
+      dispatch(logOut());
+      alert("로그아웃 되었습니다");
+      history.push("/");
+    });
   };
 };
 
@@ -68,9 +82,15 @@ export default handleActions(
     [SET_USER]: (state, action) =>
       produce(state, (draft) => {
         const decoded = jwt_decode(action.payload.token);
-        console.log(decoded);
+        //console.log(decoded);
         draft.user = decoded;
         draft.isLoggedIn = true;
+      }),
+    [LOG_OUT]: (state, action) =>
+      produce(state, (draft) => {
+        deleteCookie("user");
+        draft.user = null;
+        draft.isLoggedIn = false;
       }),
   },
   initialState
@@ -79,5 +99,7 @@ export default handleActions(
 export const actionCreators = {
   signupMiddleware,
   loginMiddleware,
+  logOutMiddleware,
   setUser,
+  logOut,
 };

@@ -30,7 +30,7 @@ const getWishList = (email) => {
         dispatch(loadWishs(wishList));
       })
       .catch((error) => {
-        window.alert("위시리스트를 불러오는데 실패 하였습니다.");
+        window.alert("위시리스트를 불러오는데 실패하였습니다.");
         console.error(error);
       });
   };

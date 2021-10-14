@@ -12,6 +12,7 @@ import "slick-carousel/slick/slick-theme.css";
 import styled from "styled-components";
 
 export default function WishList(props) {
+  const dispatch = useDispatch();
   const wishList = useSelector((state) => state.wish.list);
 
   const slickSettings = {

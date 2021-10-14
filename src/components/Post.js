@@ -23,7 +23,8 @@ export default function Post({ post }) {
       return;
     }
     console.log("toggleWish");
-    dispatch(wishActions.addWishItem("muzzi1@muzzi.com", _id));
+    dispatch(wishActions.addWishItem());
+    //dispatch(wishActions.addWishItem("muzzi1@muzzi.com", _id));
     setIsWished(true);
     return;
     // try {
