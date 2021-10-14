@@ -20,4 +20,6 @@ https://www.notion.so/99-Week-4-Mini-Project-IDEA-670f2d99e4f646a6a74060747a5b4a
 
 - POST DATA 하나에 해당하는 전체 위시리스트(좋아요) 카운트를 줄 수 있나요? 내려줄 때 정렬해서 응답주실 수 있나요?ㅠㅜ
 
+- 13일 수요일 인증 기능 구현 -> 배포환경에서 테스트를 위한 frontend 중간 배포 완료 http://hanghaeidea.s3-website.ap-northeast-2.amazonaws.com/
+
 # Frontend
