@@ -53,7 +53,7 @@ const createPost = (title = "", spec = "", place = "", desc = "", image = "") =>
         const _post = {
             title: title,
             spec: spec,
-            nickname: "ynjnkn",
+            nickname: "오늘의집구석",
             image: image,
             place: place,
             desc: desc,

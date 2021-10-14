@@ -6,15 +6,19 @@ import { Grid, Text, Button, Image, Input } from "../components/elements";
 import Upload from "../components/Upload";
 
 const PostWrite = (props) => {
-    // 로그인 상태
+    // 유저 정보 갖고 오기 필요
+    // 유저 로그인 상태 확인 필요
+    // 유저 닉네임 가져오기 필요
+    
     let is_login = true;
 
     const dispatch = useDispatch();
     const { history } = props;
 
-    
     const imagePreview = useSelector((state) => state.image.preview);
     const image = useSelector((state) => state.image.image_url);
+    // const postList = useSelector((state) => state.post.list.post);
+    // console.log(postList);
 
     const [title, setTitle] = React.useState("");
     const [spec, setSpec] = React.useState("");
