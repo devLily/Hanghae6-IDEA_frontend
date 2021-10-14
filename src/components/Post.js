@@ -27,14 +27,8 @@ export default function Post({ post }) {
     //dispatch(wishActions.addWishItem("muzzi1@muzzi.com", _id));
     setIsWished(true);
     return;
-    // try {
-    // } catch (err) {
-    //   console.error();
-    // } finally {
-    // }
   }, [dispatch, isWished, postId]);
-  // 거실=1, 침실=2, 주방=3, 화장실=4, 기타=5
-  // addWishItem
+
   const setPlaceName = () => {
     switch (Number(place)) {
       case 1:
@@ -60,7 +54,7 @@ export default function Post({ post }) {
           <AiOutlineHeart size={20} onClick={toggleWish} />
         )}
       </Heart>
-      {/* s */}
+
       <Grid padding="10px">
         <Text bold>
           <FaUserCircle /> {nickname}
