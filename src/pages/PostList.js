@@ -9,7 +9,7 @@ import { FaChevronRight } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import Post from "../components/Post";
+import PostListItem from "../components/PostListItem";
 
 export default function PostList(props) {
   const postList = useSelector((state) => state.post.list);
@@ -32,7 +32,7 @@ export default function PostList(props) {
       <SliderWrap>
         <Slider {...slickSettings}>
           {postList.map((post) => {
-            return <Post key={post.postId} post={post} />;
+            return <PostListItem key={post.postId} post={post} />;
           })}
         </Slider>
       </SliderWrap>
