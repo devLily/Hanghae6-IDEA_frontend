@@ -3,13 +3,14 @@ import { produce } from "immer";
 import { apis } from "../../utils/apis";
 
 import { actionCreators as postActions } from "./post";
+import { getCookie } from "../../utils/cookie";
 
 const LOAD_WISHS = "LOAD_WISHS";
 const ADD_WISH = "ADD_WISH";
 const DELETE_WISH = "DELETE_WISH";
 
 const loadWishs = createAction(LOAD_WISHS, (list) => ({ list }));
-const addWish = createAction(ADD_WISH, (postId, email) => ({ postId, email }));
+const addWish = createAction(ADD_WISH, (postId) => ({ postId }));
 const deleteWish = createAction(DELETE_WISH, (postId, email) => ({
   postId,
   email,
@@ -19,15 +20,20 @@ const initialState = {
   list: [],
 };
 
-const getWishList = (email) => {
+const getWishList = () => {
   return (dispatch) => {
-    if (!email) return;
+    // if (!email) return;
 
     apis
       .getWishs()
       .then((res) => {
+        const user = getCookie("user");
+        console.log("user", user);
+
+        console.log("res", res);
         const wishList = res.data.wish;
         dispatch(loadWishs(wishList));
+        console.log("wishList", wishList);
       })
       .catch((error) => {
         window.alert("위시리스트를 불러오는데 실패하였습니다.");
@@ -36,16 +42,16 @@ const getWishList = (email) => {
   };
 };
 
-const addWishItem = (email, postId) => {
+const addWishItem = (postId) => {
   return (dispatch) => {
-    if (!email) return;
+    //if (!email) return;
 
-    console.log(email, postId);
+    console.log(postId);
 
     apis
-      .addWish(email, postId)
+      .addWish(postId)
       .then((res) => {
-        console.log("res", res);
+        console.log("res", res.data);
         const wishItem = res?.data.wish;
         if (wishItem) {
           dispatch(addWish(wishItem));
@@ -92,7 +98,7 @@ export default handleActions(
       produce(state, (draft) => {
         // 같은 postId를 배열에서 찾아서 is_like를 바꿔준다.
         draft.list = state.list.filter(
-          (wishItem) => wishItem !== action.payload.wishId
+          (wishItem) => wishItem !== action.payload.Id
         );
         // draft.list.push(action.payload.list);
       }),

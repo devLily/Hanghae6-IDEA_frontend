@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { FaUserCircle } from "react-icons/fa";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -9,22 +9,24 @@ import { RiShieldUserLine } from "react-icons/ri";
 
 import { actionCreators as wishActions } from "../redux/modules/wish";
 
+import { history } from "../redux/configStore";
 import { Grid, Image, Text } from "../components/elements";
 
 export default function Post({ post }) {
+  const dispatch = useDispatch();
+  // const userMail = useSelector((state) => state.user.user.email);
+
   const { title, spec, image, nickname, place, postId } = post;
   const [isWished, setIsWished] = useState(false);
-  const dispatch = useDispatch();
 
   const toggleWish = useCallback(() => {
     if (isWished) {
-      dispatch(wishActions.deleteWishItem());
+      dispatch(wishActions.deleteWishItem(postId));
       setIsWished(false);
       return;
     }
-    console.log("toggleWish");
-    dispatch(wishActions.addWishItem());
-    //dispatch(wishActions.addWishItem("muzzi1@muzzi.com", _id));
+    console.log("isWished", isWished);
+    dispatch(wishActions.addWishItem(postId));
     setIsWished(true);
     return;
   }, [dispatch, isWished, postId]);
@@ -44,9 +46,52 @@ export default function Post({ post }) {
     }
   };
 
+  // if (user.isLoggedIn) {
+  //   return (
+  //     <Wrap>
+  //       <Images
+  //         src={
+  //           image
+  //             ? image
+  //             : "http://www.cleandropleon.com/sistema/assets/images/services/default.png"
+  //         }
+  //         alt=""
+  //         onClick={() => {
+  //           history.push(`/post/${postId}`);
+  //         }}
+  //       />
+  //       <Heart>
+  //         {isWished ? (
+  //           <AiTwotoneHeart size={20} color="red" onClick={toggleWish} />
+  //         ) : (
+  //           <AiOutlineHeart size={20} onClick={toggleWish} />
+  //         )}
+  //       </Heart>
+
+  //       <Grid padding="10px">
+  //         <Text bold>
+  //           <FaUserCircle /> {nickname}
+  //         </Text>
+  //         <Text>{title}</Text>
+  //         <Text>추천공간 {setPlaceName()}</Text>
+  //         <Text>{spec}</Text>
+  //       </Grid>
+  //     </Wrap>
+  //   );
+  // }
   return (
     <Wrap>
-      <Images src={image} alt="goods" />
+      <Images
+        src={
+          image
+            ? image
+            : "http://www.cleandropleon.com/sistema/assets/images/services/default.png"
+        }
+        alt=""
+        onClick={() => {
+          history.push(`/post/${postId}`);
+        }}
+      />
       <Heart>
         {isWished ? (
           <AiTwotoneHeart size={20} color="red" onClick={toggleWish} />
@@ -54,7 +99,6 @@ export default function Post({ post }) {
           <AiOutlineHeart size={20} onClick={toggleWish} />
         )}
       </Heart>
-
       <Grid padding="10px">
         <Text bold>
           <FaUserCircle /> {nickname}
@@ -67,12 +111,13 @@ export default function Post({ post }) {
   );
 }
 
-// Post.defaultProps = {
-//   image:
-//     "http://www.cleandropleon.com/sistema/assets/images/services/default.png",
-// };
+Post.defaultProps = {
+  image:
+    "http://www.cleandropleon.com/sistema/assets/images/services/default.png",
+};
 
 const Images = styled.img`
+  cursor: pointer;
   min-height: 300px;
   width: 100%;
   /* height: 150px; */

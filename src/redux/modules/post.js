@@ -27,7 +27,7 @@ const getPostList = () => {
     apis
       .getPosts()
       .then((res) => {
-        console.log("results:", res.data.results);
+        //console.log("results:", res.data.results);
         const postList = res.data.results;
         dispatch(loadPosts(postList));
       })
@@ -50,7 +50,7 @@ const createPost = (
     const _post = {
       title: title,
       spec: spec,
-      nickname: "오늘의집구석",
+      nickname: "코드공주",
       image: image,
       place: place,
       desc: desc,

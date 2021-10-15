@@ -10,11 +10,12 @@ export const apis = {
   deletePost: (id) => instance.delete(`/post/${id}`),
   // 게시물 삭제하기
 
-  getWishs: (email) => instance.get("/wish", email),
+  getWishs: () => instance.get("/wish"),
   // 위시리스트 불러오기
-  addWish: (email, postId) => instance.post("/wish", { email, postId }),
+  addWish: (postId) => instance.post("/wish", { postId }),
   // 위시리스트 등록하기
-  deleteWish: (wishId) => instance.delete(`/wish/${wishId}`),
+  deleteWish: (wishId, postId) =>
+    instance.delete(`/wish/${wishId}`, { postId }),
   // 위시리스트 삭제하기
   signUp: (user) => instance.post("/signup", user),
   // 회원가입 요청

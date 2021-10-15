@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { apis } from "../utils/apis";
 import { setCookie, getCookie } from "../utils/cookie";
 import { actionCreators as userActions } from "../redux/modules/user";
+import { actionCreators as wishActions } from "../redux/modules/wish";
 
 import styled from "styled-components";
 
@@ -39,6 +40,7 @@ export default function Login(props) {
 
   const onClickLogin = () => {
     dispatch(userActions.loginMiddleware(loginInput));
+    dispatch(wishActions.getWishList());
   };
 
   return (

@@ -4,10 +4,12 @@ import { Route, Switch } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+
 import { history } from "../redux/configStore";
 
 import { actionCreators as postActions } from "../redux/modules/post";
 import { actionCreators as userActions } from "../redux/modules/user";
+import { actionCreators as wishActions } from "../redux/modules/wish";
 
 import { Grid } from "../components/elements";
 import Header from "../components/Header";
@@ -42,6 +44,7 @@ export default function App() {
   useEffect(() => {
     if (getCookie("user")) {
       dispatch(userActions.setUser(getCookie("user")));
+      dispatch(wishActions.getWishList());
     }
     dispatch(postActions.getPostList());
   }, []);
@@ -54,12 +57,12 @@ export default function App() {
         <ConnectedRouter history={history}>
           <Header />
           <Switch>
-            <Route path="/" exact component={PostList} />
-            <Route path="/login" exact component={Login} />
-            <Route path="/signup" exact component={Signup} />
-            <Route path="/wish/:id" exact component={WishList} />
-            <Route path="/write" exact component={PostWrite} />
-            <Route exact path="/post/:postId" component={PostDetail} />
+            <Route path="/" component={PostList} exact />
+            <Route path="/login" component={Login} exact />
+            <Route path="/signup" component={Signup} exact />
+            <Route path="/wish" component={WishList} exact />
+            <Route path="/write" component={PostWrite} exact />
+            <Route path="/post/:postId" component={PostDetail} exact />
           </Switch>
         </ConnectedRouter>
       </Grid>

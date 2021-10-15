@@ -4,6 +4,8 @@ import jwt_decode from "jwt-decode";
 import { apis } from "../../utils/apis";
 import { setCookie, deleteCookie } from "../../utils/cookie";
 
+import { actionCreators as wishActions } from "./wish";
+
 const POST_LOGIN = "POST_LOGIN";
 const SET_USER = "SET_USER";
 const LOG_OUT = "LOG_OUT";
@@ -18,7 +20,7 @@ const initialState = {
 };
 
 const signupMiddleware = (user) => {
-  return () => {
+  return function ({ history }) {
     apis
       .signUp(user)
       .then((res) => {
@@ -29,8 +31,10 @@ const signupMiddleware = (user) => {
          * }
          */
 
-        if (res?.data?.result === "success") {
-          window.alert("회원가입이 완료되었습니다.");
+        if (res?.data?.results === "완료?") {
+          window.alert("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다");
+          // history.push("/login");
+          window.location.href = "/login";
         }
       })
       .catch((error) => {
@@ -38,6 +42,7 @@ const signupMiddleware = (user) => {
         const errorMessage =
           errorResposnse?.data?.result ?? "회원가입에 실패하였습니다.";
         window.alert(errorMessage);
+        history.push("/");
       });
   };
 };
@@ -51,8 +56,9 @@ const loginMiddleware = (params) => {
         const { token } = res.data;
         dispatch(setUser(token));
         setCookie("user", token);
+        // dispatch(wishActions.getWishList());
         window.alert("로그인 성공!");
-        window.location("/");
+        window.location.href = "/";
       })
       .catch((error) => {
         window.alert("로그인에 실패하였습니다. 다시 시도해주세요");
@@ -67,6 +73,7 @@ const logOutMiddleware = async () => {
       //console.log(res.data);
       dispatch(logOut());
       window.alert("로그아웃 되었습니다");
+      window.location.href = "/";
       //history.push("/");
     });
   };
