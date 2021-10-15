@@ -11,7 +11,6 @@ export default function Input(props) {
     placeholder,
     authChange,
     authKeyDown,
-    disabled,
   } = props;
 
   return (
