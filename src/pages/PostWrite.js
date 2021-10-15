@@ -39,6 +39,7 @@ const PostWrite = (props) => {
   const changePlace = (e) => {
     // console.log("추천 공간 입력");
     setPlace(e.target.value);
+    console.log(setPlace);
   };
 
   const changeDesc = (e) => {
@@ -99,6 +100,16 @@ const PostWrite = (props) => {
               <Text width="100px" bold>
                 추천 공간
               </Text>
+              {/* <label for="pet-select">Choose a pet:</label> */}
+              {/* 거실=1, 침실=2, 주방=3, 화장실=4, 기타=5 */}
+              <select name="place" id="">
+                <option value="">--Please choose place--</option>
+                <option value="1">거실</option>
+                <option value="2">침실</option>
+                <option value="3">주방</option>
+                <option value="4">화장실</option>
+                <option value="5">기타</option>
+              </select>
               <Input width="100%" _onChange={changePlace} />
             </Grid>
             {/* 제품 설명 */}

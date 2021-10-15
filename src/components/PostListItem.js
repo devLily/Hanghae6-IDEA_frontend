@@ -1,14 +1,14 @@
-import React, { useState, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import styled from "styled-components";
-import { FaUserCircle } from "react-icons/fa";
-import { AiOutlineHeart } from "react-icons/ai";
-import { AiTwotoneHeart } from "react-icons/ai";
+import React, { useState, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import styled from 'styled-components';
+import { FaUserCircle } from 'react-icons/fa';
+import { AiOutlineHeart } from 'react-icons/ai';
+import { AiTwotoneHeart } from 'react-icons/ai';
 
-import { actionCreators as wishActions } from "../redux/modules/wish";
+import { actionCreators as wishActions } from '../redux/modules/wish';
 
-import { history } from "../redux/configStore";
-import { Grid, Image, Text } from "../components/elements";
+import { history } from '../redux/configStore';
+import { Grid, Image, Text } from '../components/elements';
 
 export default function PostListItem({ post }) {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ export default function PostListItem({ post }) {
   // 2. 다시 wish API 요청하기
   const toggleWish = useCallback(() => {
     if (isWished) {
-      console.log("wishId", wishId);
+      console.log('wishId', wishId);
       dispatch(wishActions.deleteWishItem(wishId));
     } else {
       dispatch(wishActions.addWishItem(postId));
@@ -33,15 +33,15 @@ export default function PostListItem({ post }) {
   const setPlaceName = () => {
     switch (Number(place)) {
       case 1:
-        return "거실";
+        return '거실';
       case 2:
-        return "침실";
+        return '침실';
       case 3:
-        return "주방";
+        return '주방';
       case 4:
-        return "화장실";
+        return '화장실';
       default:
-        return "기타";
+        return '기타';
     }
   };
 
@@ -52,7 +52,7 @@ export default function PostListItem({ post }) {
           src={
             image
               ? image
-              : "http://www.cleandropleon.com/sistema/assets/images/services/default.png"
+              : 'http://www.cleandropleon.com/sistema/assets/images/services/default.png'
           }
           alt=""
           onClick={() => {
@@ -78,9 +78,9 @@ export default function PostListItem({ post }) {
         src={
           image
             ? image
-            : "http://www.cleandropleon.com/sistema/assets/images/services/default.png"
+            : 'http://www.cleandropleon.com/sistema/assets/images/services/default.png'
         }
-        alt=""
+        alt={title}
         onClick={() => {
           history.push(`/post/${postId}`);
         }}
@@ -108,7 +108,7 @@ export default function PostListItem({ post }) {
 
 PostListItem.defaultProps = {
   image:
-    "http://www.cleandropleon.com/sistema/assets/images/services/default.png",
+    'http://www.cleandropleon.com/sistema/assets/images/services/default.png',
 };
 
 const Images = styled.img`
@@ -125,7 +125,7 @@ const Wrap = styled.div`
   align-items: center;
   flex-direction: column;
   width: 300px;
-  margin: 10px;
+  padding: 10px;
 `;
 
 const DetailContainer = styled.div`

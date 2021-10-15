@@ -99,7 +99,6 @@ const createPost = (
     const _post = {
       title: title,
       spec: spec,
-      nickname: "코드공주",
       image: image,
       place: place,
       descr: desc,
