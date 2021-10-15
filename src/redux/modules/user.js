@@ -2,7 +2,7 @@ import { createAction, handleActions } from "redux-actions";
 import { produce } from "immer";
 import jwt_decode from "jwt-decode";
 import { apis } from "../../utils/apis";
-import { setCookie, deleteCookie } from "../../utils/cookie";
+import { setCookie, deleteCookie, getCookie } from "../../utils/cookie";
 
 import { actionCreators as wishActions } from "./wish";
 
@@ -54,6 +54,11 @@ const loginMiddleware = (params) => {
       .then((res) => {
         //console.log(res.data);
         const { token } = res.data;
+
+        if (getCookie("user")) {
+          deleteCookie("user");
+          console.log("유저있음 로그인안함");
+        }
         dispatch(setUser(token));
         setCookie("user", token);
         // dispatch(wishActions.getWishList());

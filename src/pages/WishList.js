@@ -31,39 +31,24 @@ export default function WishList(props) {
 
   if (!wishList?.length) {
     return (
-      <h1>
+      <EmptyWish>
         등록된 wish Item이 없습니다, <br />
         게시물의 하트를 눌러 마음에 드는 소품을 추가해보세요!
-      </h1>
+      </EmptyWish>
     );
   }
 
   return (
-    <Title>위시리스트</Title>
-    // <PostListContainer>
-    //   <SliderWrap>
-    //     <Slider {...slickSettings}>
-    //       {wishList.map((post) => {
-    //         return <Post key={post.postId} post={post} />;
-    //       })}
-    //     </Slider>
-    //   </SliderWrap>
-    // </PostListContainer>
+    <PostListContainer>
+      <SliderWrap>
+        <Slider {...slickSettings}>
+          {wishList.map((post) => {
+            return <Post key={post.postId} post={post} />;
+          })}
+        </Slider>
+      </SliderWrap>
+    </PostListContainer>
   );
-
-  // return(
-  //   <Wrap>
-  //     <IconWrap>
-  //       <FaChevronLeft size={30} onClick/>
-  //     </IconWrap>
-  //       <Post/>
-  //       <Post/>
-  //       <Post/>
-  //     <IconWrap>
-  //       <FaChevronRight size={30} onClick/>
-  //     </IconWrap>
-  //   </Wrap>
-  // );
 }
 
 const PostListContainer = styled.div`
@@ -110,6 +95,7 @@ const SnackBar = styled.div`
   transition: bottom 0.5s opacity 0.5s;
 `;
 
-const Title = styled.h1`
+const EmptyWish = styled.h1`
   font-size: 30px;
+  text-align: center;
 `;

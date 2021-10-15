@@ -12,8 +12,9 @@ import { actionCreators as wishActions } from "../redux/modules/wish";
 import { history } from "../redux/configStore";
 import { Grid, Image, Text } from "../components/elements";
 
-export default function Post({ post }) {
+export default function PostListItem({ post }) {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
   // const userMail = useSelector((state) => state.user.user.email);
 
   const { title, spec, image, nickname, place, postId } = post;
@@ -46,39 +47,40 @@ export default function Post({ post }) {
     }
   };
 
-  // if (user.isLoggedIn) {
-  //   return (
-  //     <Wrap>
-  //       <Images
-  //         src={
-  //           image
-  //             ? image
-  //             : "http://www.cleandropleon.com/sistema/assets/images/services/default.png"
-  //         }
-  //         alt=""
-  //         onClick={() => {
-  //           history.push(`/post/${postId}`);
-  //         }}
-  //       />
-  //       <Heart>
-  //         {isWished ? (
-  //           <AiTwotoneHeart size={20} color="red" onClick={toggleWish} />
-  //         ) : (
-  //           <AiOutlineHeart size={20} onClick={toggleWish} />
-  //         )}
-  //       </Heart>
+  if (!user) {
+    return (
+      <Wrap>
+        <Images
+          src={
+            image
+              ? image
+              : "http://www.cleandropleon.com/sistema/assets/images/services/default.png"
+          }
+          alt=""
+          onClick={() => {
+            history.push(`/post/${postId}`);
+          }}
+        />
+        {/* <Heart>
+          {isWished ? (
+            <AiTwotoneHeart size={20} color="red" onClick={toggleWish} />
+          ) : (
+            <AiOutlineHeart size={20} onClick={toggleWish} />
+          )}
+        </Heart> */}
 
-  //       <Grid padding="10px">
-  //         <Text bold>
-  //           <FaUserCircle /> {nickname}
-  //         </Text>
-  //         <Text>{title}</Text>
-  //         <Text>추천공간 {setPlaceName()}</Text>
-  //         <Text>{spec}</Text>
-  //       </Grid>
-  //     </Wrap>
-  //   );
-  // }
+        <Grid padding="10px">
+          <Text bold>
+            <FaUserCircle /> {nickname}
+          </Text>
+          <Text>{title}</Text>
+          <Text>추천공간 {setPlaceName()}</Text>
+          <Text>{spec}</Text>
+        </Grid>
+      </Wrap>
+    );
+  }
+
   return (
     <Wrap>
       <Images
@@ -111,7 +113,7 @@ export default function Post({ post }) {
   );
 }
 
-Post.defaultProps = {
+PostListItem.defaultProps = {
   image:
     "http://www.cleandropleon.com/sistema/assets/images/services/default.png",
 };

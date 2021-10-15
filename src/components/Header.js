@@ -11,13 +11,21 @@ export default function Header(props) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
 
-  const toLoginPage = () => {
+  const toLogin = () => {
     //console.log("history", history);
     history.push("/login");
   };
 
-  const toSignupPage = () => {
+  const toSignup = () => {
     history.push("/signup");
+  };
+
+  const toWishList = () => {
+    history.push("/wish");
+  };
+
+  const toPostWrite = () => {
+    history.push("/write");
   };
 
   const toLogOut = async () => {
@@ -37,13 +45,8 @@ export default function Header(props) {
         </LogoLink>
 
         <ButtonWrap>
-          <HeaderButton
-            onClick={() => {
-              history.push("/wish");
-            }}
-          >
-            My Page
-          </HeaderButton>
+          <HeaderButton onClick={toWishList}>My Page</HeaderButton>
+          <HeaderButton onClick={toPostWrite}>Post Write</HeaderButton>
           <HeaderButton onClick={toLogOut}>Log out</HeaderButton>
         </ButtonWrap>
       </HeaderContainer>
@@ -57,8 +60,8 @@ export default function Header(props) {
       </LogoLink>
 
       <ButtonWrap>
-        <HeaderButton onClick={toLoginPage}>Login</HeaderButton>
-        <HeaderButton onClick={toSignupPage}>Signup</HeaderButton>
+        <HeaderButton onClick={toLogin}>Login</HeaderButton>
+        <HeaderButton onClick={toSignup}>Signup</HeaderButton>
       </ButtonWrap>
     </HeaderContainer>
   );
