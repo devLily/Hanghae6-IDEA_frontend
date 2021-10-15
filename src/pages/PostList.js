@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Slider from "react-slick";
 
-import { FaChevronLeft } from "react-icons/fa";
-import { FaChevronRight } from "react-icons/fa";
+import { actionCreators as postActions } from "../redux/modules/post";
+import { actionCreators as wishActions } from "../redux/modules/wish";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -12,7 +12,9 @@ import "slick-carousel/slick/slick-theme.css";
 import PostListItem from "../components/PostListItem";
 
 export default function PostList(props) {
-  const postList = useSelector((state) => state.post.list);
+  const { list: postList } = useSelector((state) => state.post);
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
   const slickSettings = {
     dots: true, // pagination dot
     infinite: true, // 끝이없음.
@@ -23,9 +25,21 @@ export default function PostList(props) {
   };
   console.log("postList", postList);
 
+  useEffect(() => {
+    // 사용자 정보가 있을 때만 wishList 요청
+    if (user) {
+      dispatch(wishActions.getWishList());
+    }
+  }, [dispatch, user]);
+
+  useEffect(() => {
+    dispatch(postActions.getPostList());
+  }, [dispatch]);
+
   if (!postList?.length) {
     return null;
   }
+
   // 거실=1, 침실=2, 주방=3, 화장실=4, 기타=5
   return (
     <PostListContainer>
@@ -70,8 +84,4 @@ const SliderWrap = styled.div`
       }
     }
   }
-`;
-
-const IconWrap = styled.div`
-  cursor: pointer;
 `;

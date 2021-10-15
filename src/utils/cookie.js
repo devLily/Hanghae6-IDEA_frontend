@@ -6,7 +6,6 @@ export const getCookie = (name) => {
     return parts.pop().split(";").shift();
   }
 };
-getCookie("user");
 
 export const setCookie = (name, value, exp = 5) => {
   const date = new Date();

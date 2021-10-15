@@ -128,7 +128,7 @@ const PostWrite = (props) => {
         <Text size="16px">로그인 후에만 글을 쓸 수 있어요!</Text>
         <Button
           _onClick={() => {
-            // history.replace("/login");
+            history.replace("/login");
           }}
         >
           로그인 하러가기

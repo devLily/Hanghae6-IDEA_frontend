@@ -2,6 +2,7 @@ import instance from "../lib/axios";
 
 export const apis = {
   getPosts: () => instance.get("/post"),
+  getPostById: (id) => instance.get(`/post/${id}`),
   // 게시물 불러오기
   createPost: (contents) => instance.post("/post", contents),
   // 게시물 작성하기
@@ -14,8 +15,7 @@ export const apis = {
   // 위시리스트 불러오기
   addWish: (postId) => instance.post("/wish", { postId }),
   // 위시리스트 등록하기
-  deleteWish: (wishId, postId) =>
-    instance.delete(`/wish/${wishId}`, { postId }),
+  deleteWish: (wishId) => instance.delete(`/wish/${wishId}`),
   // 위시리스트 삭제하기
   signUp: (user) => instance.post("/signup", user),
   // 회원가입 요청

@@ -3,9 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { FaUserCircle } from "react-icons/fa";
 import { AiOutlineHeart } from "react-icons/ai";
-import { RiHeartAddLine } from "react-icons/ri";
 import { AiTwotoneHeart } from "react-icons/ai";
-import { RiShieldUserLine } from "react-icons/ri";
 
 import { actionCreators as wishActions } from "../redux/modules/wish";
 
@@ -15,22 +13,22 @@ import { Grid, Image, Text } from "../components/elements";
 export default function PostListItem({ post }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  // const userMail = useSelector((state) => state.user.user.email);
 
-  const { title, spec, image, nickname, place, postId } = post;
-  const [isWished, setIsWished] = useState(false);
+  const { title, spec, image, nickname, place, postId, isWished, wishId } =
+    post;
 
+  // 좋아요 리스트 클릭 시, 액션
+  // 1. 삭제하기 or 추가하기
+  // 2. 다시 wish API 요청하기
   const toggleWish = useCallback(() => {
     if (isWished) {
-      dispatch(wishActions.deleteWishItem(postId));
-      setIsWished(false);
-      return;
+      console.log("wishId", wishId);
+      dispatch(wishActions.deleteWishItem(wishId));
+    } else {
+      dispatch(wishActions.addWishItem(postId));
     }
-    console.log("isWished", isWished);
-    dispatch(wishActions.addWishItem(postId));
-    setIsWished(true);
-    return;
-  }, [dispatch, isWished, postId]);
+    dispatch(wishActions.getWishList());
+  }, [dispatch, isWished, postId, wishId]);
 
   const setPlaceName = () => {
     switch (Number(place)) {
@@ -61,13 +59,6 @@ export default function PostListItem({ post }) {
             history.push(`/post/${postId}`);
           }}
         />
-        {/* <Heart>
-          {isWished ? (
-            <AiTwotoneHeart size={20} color="red" onClick={toggleWish} />
-          ) : (
-            <AiOutlineHeart size={20} onClick={toggleWish} />
-          )}
-        </Heart> */}
 
         <Grid padding="10px">
           <Text bold>
@@ -94,21 +85,23 @@ export default function PostListItem({ post }) {
           history.push(`/post/${postId}`);
         }}
       />
-      <Heart>
-        {isWished ? (
-          <AiTwotoneHeart size={20} color="red" onClick={toggleWish} />
-        ) : (
-          <AiOutlineHeart size={20} onClick={toggleWish} />
-        )}
-      </Heart>
-      <Grid padding="10px">
-        <Text bold>
-          <FaUserCircle /> {nickname}
-        </Text>
-        <Text>{title}</Text>
-        <Text>추천공간 {setPlaceName()}</Text>
-        <Text>{spec}</Text>
-      </Grid>
+      <DetailContainer>
+        <TextWrap>
+          <Text bold>
+            <FaUserCircle /> {nickname}
+          </Text>
+          <Text>{title}</Text>
+          <Text>추천공간 {setPlaceName()}</Text>
+          <Text>{spec}</Text>
+        </TextWrap>
+        <Heart>
+          {isWished ? (
+            <AiTwotoneHeart size={20} color="red" onClick={toggleWish} />
+          ) : (
+            <AiOutlineHeart size={20} onClick={toggleWish} />
+          )}
+        </Heart>
+      </DetailContainer>
     </Wrap>
   );
 }
@@ -123,7 +116,6 @@ const Images = styled.img`
   min-height: 300px;
   width: 100%;
   /* height: 150px; */
-  padding: 10px;
   margin: 0 auto;
 `;
 
@@ -133,11 +125,23 @@ const Wrap = styled.div`
   align-items: center;
   flex-direction: column;
   width: 300px;
+  margin: 10px;
+`;
+
+const DetailContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+`;
+
+const TextWrap = styled.div`
+  width: calc(100% - 25px);
 `;
 
 const Heart = styled.div`
-  display: flex;
-  margin-left: 150px;
+  flex: 1;
+  /* margin-left: 150px; */
   cursor: pointer;
   &:hover {
     size: 25;

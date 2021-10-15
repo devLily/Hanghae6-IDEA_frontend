@@ -7,9 +7,7 @@ import reset from "styled-reset";
 
 import { history } from "../redux/configStore";
 
-import { actionCreators as postActions } from "../redux/modules/post";
 import { actionCreators as userActions } from "../redux/modules/user";
-import { actionCreators as wishActions } from "../redux/modules/wish";
 
 import { Grid } from "../components/elements";
 import Header from "../components/Header";
@@ -39,16 +37,19 @@ const GlobalStyle = createGlobalStyle`
 `;
 // 1. cookie가 있는지 확인 => getcookie
 export default function App() {
+  const user = useSelector((state) => state.user.user);
+  const userByCookie = getCookie("user");
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (getCookie("user")) {
+    // 사용자 정보가 redux state에는 있지만 cookie에는 없을 때, 로그인 정보 초기화
+    if (!user && userByCookie) {
       dispatch(userActions.setUser(getCookie("user")));
-      dispatch(wishActions.getWishList());
     }
-    dispatch(postActions.getPostList());
-  }, []);
-  //console.log("user", getCookie("user"));
+    if (user && !userByCookie) {
+      dispatch(userActions.setUser(null));
+    }
+  }, [dispatch, user, userByCookie]);
 
   return (
     <React.Fragment>

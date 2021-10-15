@@ -55,13 +55,17 @@ const loginMiddleware = (params) => {
         //console.log(res.data);
         const { token } = res.data;
 
+        // 기존에 쿠키가 브라우저 있었으면, 다시 삭제하고 등록해주기!
         if (getCookie("user")) {
           deleteCookie("user");
-          console.log("유저있음 로그인안함");
+          console.log("user 있음", document.cookie);
         }
-        dispatch(setUser(token));
+
         setCookie("user", token);
-        // dispatch(wishActions.getWishList());
+
+        // 쿠키 등록이 끝나면 redux user에 세팅해주기!
+        dispatch(setUser(token));
+
         window.alert("로그인 성공!");
         window.location.href = "/";
       })

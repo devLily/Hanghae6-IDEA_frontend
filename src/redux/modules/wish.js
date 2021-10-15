@@ -3,37 +3,52 @@ import { produce } from "immer";
 import { apis } from "../../utils/apis";
 
 import { actionCreators as postActions } from "./post";
-import { getCookie } from "../../utils/cookie";
 
 const LOAD_WISHS = "LOAD_WISHS";
 const ADD_WISH = "ADD_WISH";
 const DELETE_WISH = "DELETE_WISH";
 
 const loadWishs = createAction(LOAD_WISHS, (list) => ({ list }));
-const addWish = createAction(ADD_WISH, (postId) => ({ postId }));
-const deleteWish = createAction(DELETE_WISH, (postId, email) => ({
-  postId,
-  email,
-}));
+// const addWish = createAction(ADD_WISH, (postId) => ({ postId }));
+// const deleteWish = createAction(DELETE_WISH, (postId, email) => ({
+//   postId,
+//   email,
+// }));
 
 const initialState = {
   list: [],
 };
 
 const getWishList = () => {
-  return (dispatch) => {
-    // if (!email) return;
+  return (dispatch, getState) => {
+    console.log("getWishList");
 
     apis
       .getWishs()
       .then((res) => {
-        const user = getCookie("user");
-        console.log("user", user);
+        const wishList = res.data.post; // 서버에서 이렇게 post key 값으로 내려줌!
+        const postList = getState().post.list;
+        const newPostList = postList.map((post) => {
+          let newPost = { ...post, isWished: false };
 
-        console.log("res", res);
-        const wishList = res.data.wish;
-        dispatch(loadWishs(wishList));
+          if (wishList.length) {
+            wishList.forEach((wish) => {
+              // post에다가 wishId도 넣어준다!
+              newPost.wishId = wish.wishId;
+              // wishList에서 postList와 같은 값을 가진 postId가 있으면 위시리스트에 추가해준다!
+              if (wish.postId === post.postId) {
+                newPost.isWished = true;
+              }
+            });
+          }
+
+          return newPost;
+        });
         console.log("wishList", wishList);
+        console.log("newPostList", newPostList);
+
+        dispatch(loadWishs(wishList));
+        dispatch(postActions.loadPosts(newPostList));
       })
       .catch((error) => {
         window.alert("위시리스트를 불러오는데 실패하였습니다.");
@@ -52,9 +67,9 @@ const addWishItem = (postId) => {
       .addWish(postId)
       .then((res) => {
         console.log("res", res.data);
-        const wishItem = res?.data.wish;
-        if (wishItem) {
-          dispatch(addWish(wishItem));
+        // const wishItem = res?.data.wish;
+        if (res?.data?.result === "success" || res.status === 200) {
+          // dispatch(addWish(wishItem));
           window.alert("위시리스트에 등록되었습니다!");
         }
       })
@@ -65,15 +80,15 @@ const addWishItem = (postId) => {
   };
 };
 
-const deleteWishItem = (email, wishId) => {
+const deleteWishItem = (wishId) => {
   return (dispatch) => {
-    if (!email) return;
+    // if (!email) return;
 
     apis
-      .deleteWish(email, wishId)
+      .deleteWish(wishId)
       .then((res) => {
-        if (res?.data?.result === "success") {
-          dispatch(deleteWish(wishId));
+        console.log("res", res.status);
+        if (res?.data?.result === "success" || res.status === 200) {
           window.alert("위시리스트에서 삭제되었습니다!");
         }
       })

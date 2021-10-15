@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { Fragment } from "react";
+import styled from "styled-components";
 import { useParams } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -11,14 +11,13 @@ import CommentWrite from "../components/CommentWrite";
 import reactRouterDom from "react-router-dom";
 
 export default function PostDetail(props) {
-  const postList = useSelector((state) => state.post.list.post);
-  console.log("postdetail", postList);
-  const postId = useParams().postId;
+  const post = useSelector((state) => state.post.post);
+  const dispatch = useDispatch();
+  const { postId } = useParams();
 
-  // 스토어에서 user 상태 가져오기
-
-  // postList가 있을 때만 post 찾기
-  const post = postList && postList.find((post) => post.postId === postId);
+  React.useEffect(() => {
+    dispatch(postActions.getPostById(postId));
+  }, [dispatch, postId]);
 
   return (
     <Grid>
