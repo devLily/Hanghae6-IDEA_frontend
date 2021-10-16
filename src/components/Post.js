@@ -1,8 +1,8 @@
-import React, { Fragment } from "react";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
+import React, { Fragment } from 'react';
+import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Grid, Image, Text, Button } from "../components/elements";
+import { Grid, Image, Text, Button } from '../components/elements';
 
 export default function Post(props) {
   const dispatch = useDispatch();

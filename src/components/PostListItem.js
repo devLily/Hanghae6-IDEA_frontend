@@ -8,9 +8,9 @@ import { AiTwotoneHeart } from 'react-icons/ai';
 import { actionCreators as wishActions } from '../redux/modules/wish';
 
 import { history } from '../redux/configStore';
-import { Grid, Image, Text } from '../components/elements';
+import { Grid, Text } from '../components/elements';
 
-export default function PostListItem({ post }) {
+export default function PostListItem({ post, marginCenter }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
 
@@ -73,7 +73,7 @@ export default function PostListItem({ post }) {
   }
 
   return (
-    <Wrap>
+    <Wrap marginCenter={marginCenter}>
       <Images
         src={
           image
@@ -87,12 +87,12 @@ export default function PostListItem({ post }) {
       />
       <DetailContainer>
         <TextWrap>
-          <Text bold>
+          <TextDetail bold>
             <FaUserCircle /> {nickname}
-          </Text>
-          <Text>{title}</Text>
+          </TextDetail>
+          <TextDetail>{title}</TextDetail>
           <Text>추천공간 {setPlaceName()}</Text>
-          <Text>{spec}</Text>
+          <TextDetail>{spec}</TextDetail>
         </TextWrap>
         <Heart>
           {isWished ? (
@@ -117,6 +117,8 @@ const Images = styled.img`
   width: 100%;
   /* height: 150px; */
   margin: 0 auto;
+  border: 1px solid #eeeeee;
+  border-radius: 6px;
 `;
 
 const Wrap = styled.div`
@@ -126,11 +128,12 @@ const Wrap = styled.div`
   flex-direction: column;
   width: 300px;
   padding: 10px;
+  margin: ${(props) => (props.marginCenter ? '0 auto' : 0)};
 `;
 
 const DetailContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   padding: 10px;
 `;
@@ -146,6 +149,21 @@ const Heart = styled.div`
   &:hover {
     size: 25;
   }
+`;
+
+const TextDetail = styled.p`
+  height: 34px;
+  word-break: break-all;
+  font-size: 13px;
+  font-weight: ${(props) => (props.bold ? 'bold' : 400)};
+  line-height: 17px;
+  color: #000;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
 `;
 
 // router.post("/", authMiddleware, async (req, res) => {

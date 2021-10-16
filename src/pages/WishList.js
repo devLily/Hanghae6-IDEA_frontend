@@ -1,17 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-import { useSelector, useDispatch } from "react-redux";
-import PostListItem from "../components/PostListItem";
-import { actionCreators as postActions } from "../redux/modules/post";
-import { actionCreators as wishActions } from "../redux/modules/wish";
-import { FaChevronLeft } from "react-icons/fa";
-import { FaChevronRight } from "react-icons/fa";
+import { useSelector, useDispatch } from 'react-redux';
+import PostListItem from '../components/PostListItem';
+import { actionCreators as postActions } from '../redux/modules/post';
+import { actionCreators as wishActions } from '../redux/modules/wish';
 
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export default function WishList(props) {
   const { list: postList } = useSelector((state) => state.post);
@@ -27,7 +21,9 @@ export default function WishList(props) {
   }, [dispatch, user]);
 
   useEffect(() => {
-    dispatch(postActions.getPostList());
+    if (!postList.length) {
+      dispatch(postActions.getPostList());
+    }
   }, [dispatch]);
 
   if (!myPostList?.length) {
@@ -48,69 +44,26 @@ export default function WishList(props) {
         })}
       </WishListWrap>
     </WishListContainer>
-    // <PostListContainer>
-    //   <SliderWrap>
-    //     <Slider {...slickSettings}>
-    //       {wishList.map((post) => {
-    //         return <Post key={post.postId} post={post} />;
-    //       })}
-    //     </Slider>
-    //   </SliderWrap>
-    // </PostListContainer>
   );
-
-  // return(
-  //   <Wrap>
-  //     <IconWrap>
-  //       <FaChevronLeft size={30} onClick/>
-  //     </IconWrap>
-  //       <Post/>
-  //       <Post/>
-  //       <Post/>
-  //     <IconWrap>
-  //       <FaChevronRight size={30} onClick/>
-  //     </IconWrap>
-  //   </Wrap>
-  // );
 }
 
 const WishListContainer = styled.div`
   display: block;
+  width: calc(100% - 120px);
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 50px 0;
   height: calc(100vh - 70px);
+
+  @media only screen and (max-width: 768px) {
+    width: calc(100% - 30px);
+  }
 `;
 
 const WishListWrap = styled.ul`
   display: flex;
   align-items: center;
-`;
-
-const WishListItem = styled.li`
-  width: 25%;
-`;
-
-const SliderWrap = styled.div`
-  max-width: 900px;
-  margin: 0 auto;
-
-  .slick-prev,
-  .slick-next {
-    width: 30px;
-    height: 30px;
-
-    &::before {
-      color: #0438ae;
-      font-size: 30px;
-    }
-  }
-  .slick-dots {
-    li {
-      button {
-        &::before {
-          color: #0438ae;
-        }
-      }
-    }
-  }
+  flex-wrap: wrap;
 `;
 
 const SnackBar = styled.div`
@@ -127,4 +80,5 @@ const SnackBar = styled.div`
 
 const Title = styled.h1`
   font-size: 30px;
+  margin-bottom: 20px;
 `;
