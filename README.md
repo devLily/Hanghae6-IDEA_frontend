@@ -65,3 +65,7 @@ https://www.notion.so/99-Week-4-Mini-Project-IDEA-670f2d99e4f646a6a74060747a5b4a
 ### 상세 페이지, 게시물 작성/수정 페이지
 - 이미지 프리뷰 기능과 Firebase Storage에 올린 이미지의 URL을 받아내는 기능
 - 게시물의 수정을 위해 작성 페이지로 진입하면 유저가 처음부터 다시 정보들을 작성할 수고를 덜어주기 위해 수정 대상 게시물의 내용들이 default로 각 인풋 박스에 채워져있도록 하는 작업이 어려웠음. 또한 useState 및 useEffect에 대한 이해 부족으로 인해, 수정된 포스트를 관련 미들웨어에 전달할 때 의도했던 입력된 값들이 제대로 전달되지 않는 문제가 있음.
+
+### 댓글 작성
+- 로그인한 상태에서 제품의 상세페이지에 들어가면 댓글을 입력할 수 있는 input창과 Button이 있어 댓글을 입력 할 수 있다.이 과정에서 post요청을 통해서 user의 nickname, comment, postId를 요청하고 그 뒤에 get요청을 통해 nickname, comment, commentTime 받아옵니다. 그래서 commentList에 props로 받아와 댓글창을 만들어준다.
+- 처음 post요청에서 postId값을 받아오는 과정이 힘들었다. 현재 Delete요청을 하고싶지만 아직은 노력중이다..><
