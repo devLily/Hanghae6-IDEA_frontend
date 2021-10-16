@@ -19,7 +19,6 @@ import Signup from "../pages/Signup";
 import WishList from "../pages/WishList";
 import { getCookie } from "../utils/cookie";
 
-// 전역 스타일지정 - 파일로 만들어도 좋다눙 ㅇㅅㅇ!
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
@@ -63,6 +62,7 @@ export default function App() {
             <Route path="/signup" component={Signup} exact />
             <Route path="/wish" component={WishList} exact />
             <Route path="/write" component={PostWrite} exact />
+            <Route path="/write/:postId" component={PostWrite} exact />
             <Route path="/post/:postId" component={PostDetail} exact />
           </Switch>
         </ConnectedRouter>

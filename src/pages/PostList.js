@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
-import Slider from 'react-slick';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
+import Slider from "react-slick";
 
-import { actionCreators as postActions } from '../redux/modules/post';
-import { actionCreators as wishActions } from '../redux/modules/wish';
+import { actionCreators as postActions } from "../redux/modules/post";
+import { actionCreators as wishActions } from "../redux/modules/wish";
 
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-import PostListItem from '../components/PostListItem';
+import PostListItem from "../components/PostListItem";
 
 export default function PostList(props) {
   const { list: postList } = useSelector((state) => state.post);
@@ -41,7 +41,6 @@ export default function PostList(props) {
       },
     ],
   };
-  console.log('postList', postList);
 
   useEffect(() => {
     // 사용자 정보가 있을 때만 wishList 요청
@@ -66,6 +65,10 @@ export default function PostList(props) {
       <SliderWrap>
         <Slider {...slickSettings}>
           {postList.map((post) => {
+            if (user && post.nickname === user.nickname) {
+              // return <PostListItem key={post.postId} post={post} is_me />;
+              return <PostListItem key={post.postId} post={post} is_me />;
+            }
             return (
               <PostListItem key={post.postId} post={post} marginCenter={true} />
             );

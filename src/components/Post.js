@@ -1,17 +1,17 @@
-import React, { Fragment } from 'react';
-import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { Fragment } from "react";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Grid, Image, Text, Button } from '../components/elements';
+import { Grid, Image, Text, Button } from "../components/elements";
 
 export default function Post(props) {
   const dispatch = useDispatch();
 
   const post = props;
 
-  console.log(post);
+  //console.log(post);
 
-  const { nickname, title, spec, image, desc, place } = props;
+  const { nickname, title, spec, image, descr, place } = props;
 
   return (
     <Grid is_flex>
@@ -53,7 +53,7 @@ export default function Post(props) {
         {/* 제품 설명 */}
         <Grid is_flex>
           <Text bold>제품 설명</Text>
-          <Text>{desc}</Text>
+          <Text>{descr}</Text>
         </Grid>
       </Grid>
     </Grid>

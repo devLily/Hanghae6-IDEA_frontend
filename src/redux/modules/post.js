@@ -6,11 +6,15 @@ const LOAD_POSTS = "LOAD_POSTS";
 const LOAD_POST = "LOAD_POST";
 const MERGED_POSTS = "MERGED_POSTS";
 const ADD_POST = "ADD_POST";
+const EDIT_POST = "EDIT_POST";
+const DELETE_POST = "DELETE_POST";
 
 const loadPosts = createAction(LOAD_POSTS, (list) => ({ list }));
 const loadPost = createAction(LOAD_POST, (post) => ({ post })); // post 하나 가져오기!
 const mergedPosts = createAction(MERGED_POSTS, (list) => ({ list }));
 const addPost = createAction(ADD_POST, (post) => ({ post }));
+const editPost = createAction(EDIT_POST, (postId, post) => ({ postId, post }));
+const deletePost = createAction(DELETE_POST, (postId) => ({ postId }));
 
 const initialState = {
   list: [],
@@ -26,6 +30,41 @@ const initialPost = {
     "https://cfnimage.commutil.kr/phpwas/restmb_allidxmake.php?idx=3&simg=202012170917410759599ebb03838180228147171.jpg",
   nickname: "닉네임",
   place: "침실",
+};
+
+const deletePostMW = (postId, nickname) => {
+  return function (dispatch, getState, { history }) {
+    console.log(nickname);
+
+    apis
+      .deletePost(postId, nickname)
+      .then((response) => {
+        console.log(response);
+        // window.alert("게시글 수정이 완료되었습니다.");
+      })
+      .catch((error) => {
+        console.error(error);
+        // window.alert("게시글 수정에 실패했습니다.");
+      });
+    dispatch(deletePost(postId));
+  };
+};
+
+const editPostMW = (postId = null, post = {}) => {
+  return function (dispatch, getState, { history }) {
+    apis
+      .editPost(postId, post)
+      .then((response) => {
+        console.log(response);
+        window.alert("게시글 수정이 완료되었습니다.");
+      })
+      .catch((error) => {
+        console.error(error);
+        window.alert("게시글 수정에 실패했습니다.");
+      });
+
+    dispatch(editPost(postId, post));
+  };
 };
 
 const getPostList = () => {
@@ -140,6 +179,21 @@ export default handleActions(
         // draft.list = action.payload.list;
         draft.list.push(action.payload.list);
       }),
+    [EDIT_POST]: (state, action) =>
+      produce(state, (draft) => {
+        console.log("editPostMW 연결!");
+        let idx = draft.list.findIndex(
+          (p) => p.postId === action.payload.postId
+        );
+        draft.list[idx] = { ...draft.list[idx], ...action.payload.post };
+      }),
+    [DELETE_POST]: (state, action) =>
+      produce(state, (draft) => {
+        console.log("deletePostMW 연결!");
+        // draft.list = state.list.filter(
+        //   (post) => post !== action.payload.postId
+        // );
+      }),
   },
   initialState
 );
@@ -150,4 +204,6 @@ export const actionCreators = {
   getPostById,
   mergePostList,
   createPost,
+  editPostMW,
+  deletePostMW,
 };

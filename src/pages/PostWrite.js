@@ -1,23 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { actionCreators as postActions } from "../redux/modules/post";
-
+import { actionCreators as imageActions } from "../redux/modules/image";
 import { Grid, Text, Button, Image, Input } from "../components/elements";
 import Upload from "../components/Upload";
+import styled from "styled-components";
 
 const PostWrite = (props) => {
-  // 유저 정보 갖고 오기 필요
-  // 유저 로그인 상태 확인 필요
-  // 유저 닉네임 가져오기 필요
-
-  // let is_login = true;
-
+  const postId = useParams();
+  //const placeList = ["거실", "침실", "주방", "화장실", "기타"];
+  const imagePreview = useSelector((state) => state.image.preview);
+  const postList = useSelector((state) => state.post.list);
+  const image = useSelector((state) => state.image.image_url);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const dispatch = useDispatch();
   const { history } = props;
 
-  const imagePreview = useSelector((state) => state.image.preview);
-  const image = useSelector((state) => state.image.image_url);
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const isEdit = postId ? true : false;
+  let _post = isEdit
+    ? postList.find((p) => p.postId === parseInt(postId))
+    : null;
+  let _image = _post && isEdit ? _post.image : "";
   // const postList = useSelector((state) => state.post.list.post);
   // console.log(postList);
 
@@ -25,6 +29,7 @@ const PostWrite = (props) => {
   const [spec, setSpec] = React.useState("");
   const [place, setPlace] = React.useState("");
   const [desc, setDesc] = React.useState("");
+  const [imageURL, setImageURL] = React.useState(_image);
 
   const changeTitle = (e) => {
     // console.log("제품명 입력");
@@ -36,10 +41,15 @@ const PostWrite = (props) => {
     setSpec(e.target.value);
   };
 
+  // const changePlace = ({ target }) => {
+  //   // console.log("추천 공간 입력");
+  //   const { name, value } = target;
+  //   setPlace({ ...place, [name]: value });
+  //   console.log(setPlace);
+  // };
   const changePlace = (e) => {
     // console.log("추천 공간 입력");
     setPlace(e.target.value);
-    console.log(setPlace);
   };
 
   const changeDesc = (e) => {
@@ -47,17 +57,54 @@ const PostWrite = (props) => {
     setDesc(e.target.value);
   };
 
+  const changeImage = (e) => {
+    setImageURL(e.target.value);
+  };
+
   const addPost = () => {
-    // console.log("게시글 업로드 버튼 눌림");
-    // console.log(`제품명: ${title}`);
-    // console.log(`스펙: ${spec}`);
-    // console.log(`추천 공간: ${place}`);
-    // console.log(`제품 설명: ${desc}`);
-    // console.log(`이미지: ${image}`);
-    // addPost 미들웨어 실행
     dispatch(postActions.createPost(title, spec, place, desc, image));
+    history.push("/");
+    // window.localStorage.href = "/";
     // 메인페이지로 이동
   };
+
+  const editPost = () => {
+    console.log("게시글 수정 버튼 눌림");
+    console.log(`제품명: ${title}`);
+    console.log(`스펙: ${spec}`);
+    console.log(`추천 공간: ${place}`);
+    console.log(`제품 설명: ${desc}`);
+    console.log(`이미지: ${imageURL}`);
+    _post = {
+      ..._post,
+      title: title,
+      spec: spec,
+      place: place,
+      desc: desc,
+      image: imageURL,
+    };
+    // dispatch(postActions.editPostMW(postId, _post));
+    // console.log("editPostMW 실행!")
+    // 메인페이지로 이동
+    // window.location.href = "/";
+    history.push("/");
+  };
+
+  useEffect(() => {
+    // 포스트 리스트가 없을 경우에만
+    // 포스트 리스트 불러오기
+    if (postList.length === 0) {
+      dispatch(postActions.getPostList());
+      dispatch(imageActions.setPreview(imagePreview));
+    }
+
+    // 인풋들이 변할 때 _post 정보들을 새로운 상태로 바꿔주기
+    setTitle(_post?.title);
+    setSpec(_post?.spec);
+    setPlace(_post?.place);
+    setDesc(_post?.descr);
+    setImageURL(_post?.image);
+  }, [_post]);
 
   // 로그인 상태라면
   if (isLoggedIn) {
@@ -102,14 +149,14 @@ const PostWrite = (props) => {
               </Text>
               {/* <label for="pet-select">Choose a pet:</label> */}
               {/* 거실=1, 침실=2, 주방=3, 화장실=4, 기타=5 */}
-              <select name="place" id="">
+              {/* <Selector name="value" value={place} onChange={changePlace}>
                 <option value="">--Please choose place--</option>
                 <option value="1">거실</option>
                 <option value="2">침실</option>
                 <option value="3">주방</option>
                 <option value="4">화장실</option>
                 <option value="5">기타</option>
-              </select>
+              </Selector> */}
               <Input width="100%" _onChange={changePlace} />
             </Grid>
             {/* 제품 설명 */}
@@ -123,7 +170,11 @@ const PostWrite = (props) => {
         </Grid>
         {/* 게시글 업로드 버튼 */}
         <Grid margin="10px 0px 0px 0px">
-          <Button _onClick={addPost}>게시글 업로드</Button>
+          {isEdit ? (
+            <Button _onClick={editPost}>게시글 수정</Button>
+          ) : (
+            <Button _onClick={addPost}>게시글 업로드</Button>
+          )}
         </Grid>
       </Grid>
     );
@@ -140,6 +191,7 @@ const PostWrite = (props) => {
         <Button
           _onClick={() => {
             history.replace("/login");
+            // window.location.href = "/login";
           }}
         >
           로그인 하러가기
@@ -150,3 +202,9 @@ const PostWrite = (props) => {
 };
 
 export default PostWrite;
+
+const Selector = styled.select`
+  width: 100%;
+  height: 45px;
+  text-align: center;
+`;

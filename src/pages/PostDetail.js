@@ -1,14 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { useParams } from "react-router-dom";
 
-import { useSelector, useDispatch } from 'react-redux';
-import { actionCreators as postActions } from '../redux/modules/post';
-import { actionCreators as commentActions } from '../redux/modules/comment';
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreators as postActions } from "../redux/modules/post";
+import { actionCreators as commentActions } from "../redux/modules/comment";
 
-import { Grid } from '../components/elements';
-import Post from '../components/Post';
-import CommentWrite from '../components/CommentWrite';
+import { Grid, Button } from "../components/elements";
+import Post from "../components/Post";
+import CommentWrite from "../components/CommentWrite";
+import { history } from "../redux/configStore";
 // import CommentList from '../components/CommentList';
 
 export default function PostDetail(props) {
@@ -17,6 +18,13 @@ export default function PostDetail(props) {
   const comments = useSelector((state) => state.comment.list);
   const dispatch = useDispatch();
   const { postId } = useParams();
+  const nickname = user?.nickname;
+
+  const deletePost = () => {
+    console.log(`postId ${postId} 삭제하러 가기!!!`);
+    dispatch(postActions.deletePostMW(postId, nickname));
+    // history.push("/");
+  };
 
   React.useEffect(() => {
     dispatch(postActions.getPostById(postId));
@@ -29,6 +37,19 @@ export default function PostDetail(props) {
   return (
     <Grid>
       {post && <Post {...post} />}
+      {user && post?.nickname === user?.nickname && (
+        <Grid>
+          <Button
+            _onClick={() => {
+              console.log(`postId ${postId} 수정하러 가기!!!`);
+              history.push(`/write/${postId}`);
+            }}
+          >
+            수정하기
+          </Button>
+          <Button _onClick={deletePost}>삭제하기</Button>
+        </Grid>
+      )}
       {/* 로그인 됐을 경우에만 CommentWrite 활성화 */}
       {user && <CommentWrite postId={postId} />}
       <CommentTable>
@@ -42,7 +63,7 @@ export default function PostDetail(props) {
         <CommentTableBody>
           {comments.length > 0 &&
             comments.map((comment) => {
-              console.log('comment', comment);
+              console.log("comment", comment);
               return (
                 <tr>
                   <td>{comment.nickname}</td>
